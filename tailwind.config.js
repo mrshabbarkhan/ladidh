@@ -4,12 +4,12 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'nav-pattern': "url('../img')",
-        'footer-texture': "url('/img/footer-texture.png')",
+        "nav-pattern": "url('../img')",
+        "footer-texture": "url('/img/footer-texture.png')",
       },
       colors: {
         primary: {
-          DEFAULT: "#990000", 
+          DEFAULT: "#D11243",
           light: "#FF7F7F",
           dark: "#990000",
         },
