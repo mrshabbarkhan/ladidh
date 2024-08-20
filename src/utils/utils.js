@@ -1,0 +1,131 @@
+//////////////  Sales_details      ////////////////////
+import ProductOne from "../assets/images/product/1.jpg";
+import ProductTwo from "../assets/images/product/2.jpg";
+import ProductThree from "../assets/images/product/3.jpg";
+/////////////   Tranding Products   //////////////////
+import ProductFour from "../assets/images/product/4.jpg";
+import ProductFive from "../assets/images/product/5.jpg";
+import ProductSix from "../assets/images/product/6.jpg";
+/////////////      Categories       ///////////////////
+import categoryOne from "../assets/images/categore/1.png";
+import categoryTwo from "../assets/images/categore/2.png";
+import categoryThree from "../assets/images/categore/3.png";
+import categoryFour from "../assets/images/categore/4.png";
+import categoryFive from "../assets/images/categore/5.png";
+import categorySix from "../assets/images/categore/6.png";
+/////////////////// banners     //////////////////////
+import bannerOne from "../assets/images/banner/banner1.jpg";
+import bannerTwo from "../assets/images/banner/banner2.jpg";
+import bannerThree from "../assets/images/banner/banner3.jpg";
+
+export const Sale_Details = [
+  {
+    img: ProductOne,
+    pack: "Combo Pack",
+    tittle: "Fish + Fish Skinless + Cleaned Prawns",
+    code: "636G8P",
+    price: 830,
+    oldPrice: 1000,
+    discount: "40%",
+  },
+  {
+    img: ProductTwo,
+    pack: "Combo Pack",
+    tittle: "Meat + Chicken Skinless + Fish",
+    code: "636G8P",
+    price: 500,
+    oldPrice: 1000,
+    discount: "50%",
+  },
+  {
+    img: ProductThree,
+    pack: "Combo Pack",
+    tittle: "Goat + Chicken Skinless + Cleaned Prawns",
+    code: "636G8P",
+    price: 930,
+    oldPrice: 1100,
+    discount: "60%",
+  },
+];
+//////////////////////////////////////////////////////////////
+
+export const Tranding_Products = [
+  {
+    img: ProductFour,
+    pack: "1Pack",
+    tittle: "Goat Meat",
+    price: 930,
+    oldPrice: 1100,
+  },
+  {
+    img: ProductFive,
+    pack: "1Pack",
+    tittle: "Cleaned Prawns",
+    price: 430,
+    oldPrice: 800,
+  },
+  {
+    img: ProductSix,
+    pack: "1Pack",
+    tittle: "Cleaned Skinless",
+    price: 600,
+    oldPrice: 1000,
+  },
+];
+
+export const Categories_Items = [
+  {
+    img: categoryOne,
+    tittle: "Fish & Seafood",
+  },
+  {
+    img: categoryTwo,
+    tittle: " Mutton - Goat",
+  },
+  {
+    img: categoryThree,
+    tittle: "Ready to Cook",
+  },
+  {
+    img: categoryFive,
+    tittle: "Steaks & Fillets",
+  },
+  {
+    img: categorySix,
+    tittle: "Poultry",
+  },
+  {
+    img: categoryFour,
+    tittle: "Combo Packs",
+  },
+];
+
+export const NavItems = [
+  {
+    path: "/",
+    class: "house",
+    tittle: "Home",
+  },
+  {
+    path: "/category",
+    class: "box",
+    tittle: "Category",
+  },
+  {
+    path: "/favorites",
+    class: "heart",
+    tittle: "Favorites",
+  },
+  {
+    path: "/cart",
+    class: "bag-shopping",
+    tittle: "Cart",
+  },
+  {
+    path: "/profile",
+    class: "user",
+    tittle: "Account",
+  },
+];
+
+export const OfferBanners = [bannerOne, bannerTwo, bannerThree];
