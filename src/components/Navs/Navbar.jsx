@@ -16,7 +16,7 @@ function Navbar() {
             <Map />
             <div className="ml-2 text-white flex items-center justify-between w-full">
               <span className="leading-4">
-                <h1 className="font-bold text-lg">Ladidh</h1>
+                <h1 className="font-bold text-lg">Ladhidh</h1>
                 <p className="font-medium text-slate-50 text-sm ">
                   Rkpuram sector-b near chawla circle....
                 </p>
