@@ -8,11 +8,12 @@ const doubleCategoriesItems = [
 ];
 
 function CategoryPage() {
+ const navigateToProducts = "/product-list"
   return (
     <>
       <Category>
         {doubleCategoriesItems.map((dts,index) => (
-          <Categories key={index} img={dts.img} tittle={dts.tittle} />
+          <Categories key={index} img={dts.img} tittle={dts.tittle} redirect={navigateToProducts} />
         ))}
       </Category>
     </>
