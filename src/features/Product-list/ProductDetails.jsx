@@ -1,8 +1,11 @@
+import { useState } from "react";
 import img from "../../assets/images/product/1.jpg";
 import FreeDevSvg from "../../assets/ui/FreeDevSvg";
 import StarSvg from "../../assets/ui/StarSvg";
+import { Link } from "react-router-dom";
 
 function ProductDetails() {
+  const [tempQty, setTempQty] = useState(1)
   return (
     <>
       <div className="box_shadow absolute top-0 left-0 right-0 object-cover ">
@@ -35,11 +38,11 @@ function ProductDetails() {
               </span>
             </div>
             <div className="flex items-center">
-              <span className="bg-primary text-white px-3 font-semibold text-lg rounded-lg">
+              <span onClick={()=>setTempQty(tempQty>1?tempQty-1:tempQty)} className="bg-primary text-white px-3 font-semibold text-lg rounded-lg">
                 -
               </span>
-              <span className="text-lg font-semibold w-10 text-center">10</span>
-              <span className="bg-primary text-white px-2 font-semibold text-lg rounded-lg">
+              <span className="text-lg font-semibold w-10 text-center">{tempQty}</span>
+              <span onClick={()=>setTempQty(tempQty+1)} className="bg-primary text-white px-2 font-semibold text-lg rounded-lg">
                 +
               </span>
             </div>
@@ -48,7 +51,9 @@ function ProductDetails() {
       </div>
       <div className="w-full bg-white text-center z-30 px-2  py-3 fixed bottom-0 left-0">
         <div className="z-30 bg-primary text-md font-semibold py-2 max-w-5xl rounded-xl m-auto text-white">
+          <Link to={"/cart"}>
           ADD TO CART
+          </Link>
         </div>
       </div>
     </>

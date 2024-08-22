@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function CartList({
   img,
   pack = 1,
@@ -8,6 +10,7 @@ function CartList({
   price,
   oldPrice,
 }) {
+  const [tempQty, setTempQty] = useState(1)
   return (
     <div className="mb-5 Favorites_List drop-shadow-lg flex p-2 rounded-lg">
       <div className="grow flex flex-col justify-between">
@@ -37,11 +40,11 @@ function CartList({
       <div className="flex flex-col gap-10">
         <img className="w-24 rounded-lg object-cover" src={img} alt="" />
         <div className="flex justify-between">
-          <button className="border border-primary-dark px-2 rounded-lg hover:text-white hover:bg-primary-dark transition font-semibold">
+          <button onClick={()=>setTempQty(tempQty+1)} className="border border-primary-dark px-2 rounded-lg hover:text-white hover:bg-primary-dark transition font-semibold">
             +
           </button>
-          <h1 className="font-semibold">{qty}</h1>
-          <button className="border border-primary-dark px-2 rounded-lg hover:text-white hover:bg-primary-dark transition font-semibold">
+          <h1 className="font-semibold">{tempQty}</h1>
+          <button onClick={()=>setTempQty(tempQty>1?tempQty-1:tempQty)} className="border border-primary-dark px-2 rounded-lg hover:text-white hover:bg-primary-dark transition font-semibold">
             -
           </button>
         </div>
