@@ -39,7 +39,8 @@ function SideBar({ on, setOn }) {
           </li>
 
           <li>
-            <Link to={"/"}
+            <Link
+              to={"/"}
               className="nav-link flex items-center text-black py-2"
               href="index.html"
             >
@@ -51,10 +52,7 @@ function SideBar({ on, setOn }) {
           </li>
 
           <li>
-            <a
-              className="nav-link flex items-center text-black py-2"
-              href="ui-components.html"
-            >
+            <a className="nav-link flex items-center text-black py-2">
               <span className="dz-icon mr-2">
                 <ComponentsSvg />
               </span>
@@ -63,9 +61,9 @@ function SideBar({ on, setOn }) {
           </li>
 
           <li>
-            <Link to={'/profile'}
+            <Link
+              to={"/profile"}
               className="nav-link flex items-center text-black py-2"
-              href="account.html"
             >
               <span className="dz-icon mr-2">
                 <ProfileSvg />
@@ -75,10 +73,7 @@ function SideBar({ on, setOn }) {
           </li>
 
           <li>
-            <a
-              className="nav-link flex items-center text-black py-2 relative"
-              href="chat.html"
-            >
+            <a className="nav-link flex items-center text-black py-2 relative">
               <span className="dz-icon mr-2">
                 <ChatSvg />
               </span>
@@ -90,10 +85,7 @@ function SideBar({ on, setOn }) {
           </li>
 
           <li>
-            <a
-              className="nav-link flex items-center text-black py-2"
-              href="welcome.html"
-            >
+            <a className="nav-link flex items-center text-black py-2">
               <span className="dz-icon mr-2">
                 <LogoutSvg />
               </span>
@@ -111,10 +103,7 @@ function SideBar({ on, setOn }) {
             data-bs-target="#offcanvasBottom"
             aria-controls="offcanvasBottom"
           >
-            <a
-              href="javascript:void(0);"
-              className="nav-link flex items-center text-black py-2"
-            >
+            <a className="nav-link flex items-center text-black py-2">
               <span className="dz-icon mr-2">
                 <ColorTheme />
               </span>
@@ -150,7 +139,9 @@ function SideBar({ on, setOn }) {
           </li>
         </ul>
         <div className="sidebar-bottom mt-auto p-5">
-          <h6 className="name mb-2 text-black">W3Meat - Meat Shop Mobile App</h6>
+          <h6 className="name mb-2 text-black">
+            W3Meat - Meat Shop Mobile App
+          </h6>
           <span className="ver-info text-sm text-black">App Version 1.0</span>
         </div>
       </div>
