@@ -7,6 +7,8 @@ import FavoritesPage from "./features/Favorites/FavoritesPage";
 import CartPage from "./features/Cart/CartPage";
 import PageNotFound from "./components/PageNotFound";
 import ProfilePage from "./features/User/ProfilePage";
+import ProductListPage from "./features/Product-list/ProductListPage";
+import ProductDetails from "./features/Product-list/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,8 @@ const router = createBrowserRouter([
       { path: "/favorites", element: <FavoritesPage /> },
       { path: "/cart", element: <CartPage /> },
       { path: "/profile", element: <ProfilePage /> },
+      { path: "/product-list", element: <ProductListPage /> },
+      { path: "/product-details", element: <ProductDetails /> },
     ],
     errorElement: <PageNotFound />,
   },

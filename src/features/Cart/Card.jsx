@@ -1,4 +1,6 @@
-function Card({ img, pack, tittle, discount, code, price, oldPrice }) {
+import AddToButton from "../../components/AddToButton";
+
+function Card({ img, pack, tittle, discount, code, price, oldPrice, redirect }) {
   return (
     <section className="max-w-[16rem] min-w-[16rem] mb-3 text-wrap rounded-xl p-4 pb-2 bg-white shadow-lg">
       <img
@@ -25,9 +27,7 @@ function Card({ img, pack, tittle, discount, code, price, oldPrice }) {
               {oldPrice}
             </span>
           </span>
-          <button className="border border-primary-dark text-sm font-semibold px-2 rounded-lg hover:text-white hover:bg-primary-dark transition">
-            Add
-          </button>
+          <AddToButton redirect={redirect} />
         </div>
       </div>
     </section>

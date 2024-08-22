@@ -1,3 +1,5 @@
+import AddToButton from "../../components/AddToButton";
+
 function FavoriteList({ img, pack, tittle, discount, code, price, oldPrice }) {
   return (
     <div className="mb-5 Favorites_List drop-shadow-lg flex p-2 rounded-lg">
@@ -22,9 +24,7 @@ function FavoriteList({ img, pack, tittle, discount, code, price, oldPrice }) {
       </div>
       <div className="flex flex-col gap-10">
         <img className="w-24 rounded-lg object-cover" src={img} alt="" />
-        <button className="border border-primary-dark px-2 rounded-lg hover:text-white hover:bg-primary-dark transition">
-          Add
-        </button>
+        <AddToButton/>
       </div>
     </div>
   );

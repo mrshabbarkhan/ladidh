@@ -4,10 +4,10 @@ function BackButton({ children }) {
   const navigate = useNavigate();
   return (
     <button
-      className="font-medium text-lg sticky top-10 z-10"
+      className="font-medium text-lg sticky top-10 z-10 flex items-center gap-2"
       onClick={() => navigate(-1)}
     >
-      <i className="fa-solid fa-arrow-left mr-3"></i>
+      <i className="fa-solid fa-arrow-left"></i>
       {children}
     </button>
   );

@@ -35,3 +35,9 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0px 10px rgb(0, 0, 0, 0),
     4px 0 0px rgba(0, 0, 0, 0), -4px 0 0px rgba(0, 0, 0, 0);
 }
+
+.box_shadow{
+-webkit-box-shadow: inset 200px 200px 80px 77px rgba(0,0,0,1);
+-moz-box-shadow: inset 200px 200px 80px 77px rgba(0,0,0,1);
+box-shadow: inset 200px 200px 80px 77px rgba(0,0,0,1);
+}

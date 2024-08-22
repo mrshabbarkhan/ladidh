@@ -10,6 +10,7 @@ function AppLayout() {
   const pathName2 = location.pathname === "/favorites" && "Favorite";
   const pathName3 = location.pathname === "/cart" && "Cart";
   const pathName4 = location.pathname === "/profile" && "Profile";
+  const pathName5 = location.pathname === "/product-list" && "Product List";
 
   return (
     <>
@@ -18,13 +19,13 @@ function AppLayout() {
           <Navbar />
         ) : (
           <InnerNavbar>
-            {pathName1 || pathName2 || pathName3 || pathName4}
+            {pathName1 || pathName2 || pathName3 || pathName4 || pathName5}
           </InnerNavbar>
         )}
         <main className="pt-5">
           <Outlet />
         </main>
-        <NavigationBar />
+       {!pathName5 ? <NavigationBar /> : null}
       </div>
     </>
   );
