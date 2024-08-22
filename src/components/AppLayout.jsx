@@ -2,6 +2,7 @@ import { Outlet, useLocation, useNavigation } from "react-router-dom";
 import Navbar from "./Navs/Navbar";
 import InnerNavbar from "./Navs/InnerNavbar";
 import NavigationBar from "./Navs/NavigationBar";
+import SideBar from "./Navs/SideBar";
 
 function AppLayout() {
   const location = useLocation();
@@ -22,10 +23,11 @@ function AppLayout() {
             {pathName1 || pathName2 || pathName3 || pathName4 || pathName5}
           </InnerNavbar>
         )}
+
         <main className="pt-5">
           <Outlet />
         </main>
-       {!pathName5 ? <NavigationBar /> : null}
+        {!pathName5 ? <NavigationBar /> : null}
       </div>
     </>
   );
