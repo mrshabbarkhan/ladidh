@@ -50,11 +50,11 @@ function ProductDetails() {
         </section>
       </div>
       <div className="w-full bg-white text-center z-30 px-2  py-3 fixed bottom-0 left-0">
-        <div className="z-30 bg-primary text-md font-semibold py-2 max-w-5xl rounded-xl m-auto text-white">
           <Link to={"/cart"}>
+        <div className="z-30 bg-primary text-md font-semibold py-2 max-w-5xl rounded-xl m-auto text-white">
           ADD TO CART
-          </Link>
         </div>
+          </Link>
       </div>
     </>
   );

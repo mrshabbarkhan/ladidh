@@ -7,10 +7,12 @@ function OrderActions() {
     return (
       <>
         <span>
+          <Link to={"/orders"}>
           <div className="w-fit p-3 rounded-full bg-primary m-auto">
             <MyOrderSvg />
           </div>
           <p>My Order</p>
+          </Link>
         </span>
         <span>
           <Link to={"/favorites"}>
