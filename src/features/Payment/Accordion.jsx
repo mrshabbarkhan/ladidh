@@ -50,31 +50,4 @@ const Accordion = ({ title, content, icon, element }) => {
   );
 };
 
-// const AccordionList = () => {
-//   const data = [
-//     {
-//       title: "Accordion 1",
-//       content: "This is the content for accordion 1.",
-//     },
-//     {
-//       title: "Accordion 2",
-//       content: "This is the content for accordion 2.",
-//     },
-//     {
-//       title: "Accordion 3",
-//       content: "This is the content for accordion 3.",
-//     },
-//   ];
-
-//   return (
-//     <div className="max-w-md mx-auto mt-8 space-y-4">
-//       {data.map((item, index) => (
-//         <Accordion key={index} title={item.title} content={item.content} />
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default AccordionList;
-
 export default Accordion;
