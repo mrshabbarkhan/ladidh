@@ -1,16 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import AppLayout from "./components/AppLayout";
-import HomePage from "./features/Home/HomePage";
-import CategoryPage from "./features/Category/CategoryPage";
-import FavoritesPage from "./features/Favorites/FavoritesPage";
-import CartPage from "./features/Cart/CartPage";
-import PageNotFound from "./components/PageNotFound";
-import ProfilePage from "./features/User/ProfilePage";
-import ProductListPage from "./features/Product-list/ProductListPage";
-import ProductDetails from "./features/Product-list/ProductDetails";
-import OrderPage from "./features/Order/OrderPage";
-import PaymentPage from "./features/Payment/PaymentPage";
+import { lazy, Suspense } from "react";
+
+const HomePage = lazy(() => import("./features/Home/HomePage"));
+const CategoryPage = lazy(() => import("./features/Category/CategoryPage"));
+const FavoritesPage = lazy(() => import("./features/Favorites/FavoritesPage"));
+const CartPage = lazy(() => import("./features/Cart/CartPage"));
+const ProfilePage = lazy(() => import("./features/User/ProfilePage"));
+const ProductListPage = lazy(() =>import("./features/Product-list/ProductListPage"));
+const ProductDetails = lazy(() =>import("./features/Product-list/ProductDetails"));
+const OrderPage = lazy(() => import("./features/Order/OrderPage"));
+const PaymentPage = lazy(() => import("./features/Payment/PaymentPage"));
 
 const router = createBrowserRouter([
   {
@@ -26,12 +26,16 @@ const router = createBrowserRouter([
       { path: "/orders", element: <OrderPage /> },
       { path: "/payment", element: <PaymentPage /> },
     ],
-    errorElement: <PageNotFound />,
+    errorElement: <div>Page Not Found</div>,
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Suspense fallback={<div>Loading....</div>}>
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 }
 
 export default App;
