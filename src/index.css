@@ -13,9 +13,6 @@
 *::selection{
   background-color:  #D11243;
   color: white;
-     /* DEFAULT: "#D11243",
-          light: "#FF7F7F",
-          dark: "#990000", */
 }
 
 *::-webkit-scrollbar {
