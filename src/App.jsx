@@ -10,6 +10,7 @@ import ProfilePage from "./features/User/ProfilePage";
 import ProductListPage from "./features/Product-list/ProductListPage";
 import ProductDetails from "./features/Product-list/ProductDetails";
 import OrderPage from "./features/Order/OrderPage";
+import PaymentPage from "./features/Payment/PaymentPage";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: "/product-list", element: <ProductListPage /> },
       { path: "/product-details", element: <ProductDetails /> },
       { path: "/orders", element: <OrderPage /> },
+      { path: "/payment", element: <PaymentPage /> },
     ],
     errorElement: <PageNotFound />,
   },
