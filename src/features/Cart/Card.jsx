@@ -1,6 +1,7 @@
 import AddToButton from "../../components/AddToButton";
 
-function Card({ img, pack, tittle, discount, code, price, oldPrice, redirect }) {
+function Card(props) {
+  const { img, pack, tittle, discount, code, price, oldPrice, redirect } = props;
   return (
     <section className="max-w-[16rem] min-w-[16rem] mb-3 text-wrap rounded-xl p-4 pb-2 bg-white shadow-lg">
       <img
@@ -27,7 +28,7 @@ function Card({ img, pack, tittle, discount, code, price, oldPrice, redirect }) 
               {oldPrice}
             </span>
           </span>
-          <AddToButton redirect={redirect} />
+          <AddToButton {...props} redirect={redirect} />
         </div>
       </div>
     </section>

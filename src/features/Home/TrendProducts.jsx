@@ -10,6 +10,7 @@ function TrendProducts() {
                 {Tranding_Products.map((dts,index) => {
                     return <Card
                         key={index}
+                        id = {dts.id}
                         img={dts.img}
                         pack={dts.pack}
                         tittle={dts.tittle}

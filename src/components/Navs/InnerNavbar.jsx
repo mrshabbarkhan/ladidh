@@ -1,13 +1,30 @@
 import { useLocation } from "react-router-dom";
 import BackButton from "../BackButton";
 import ShoppingCart from "../ShoppingCart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavorite, removeFromFavorite } from "../../features/Favorites/favoriteSlice";
 
 function InnerNavbar({ children }) {
   const location = useLocation();
   const pathName4 = location.pathname === "/profile" && "Profile";
-  const pathName5 = location.pathname === '/product-details'
-  const [liked, setLiked] = useState(false)
+  const pathName5 = location.pathname === "/product-details";
+  
+  const dispatch = useDispatch();
+  const { product } = useSelector((state) => state.productDetails);
+  const { favoriteProducts } = useSelector((state) => state.favoriteProducts);
+
+  const isInFavoriteProduct = favoriteProducts.some(
+    (item) => item.id === product.id
+  );
+
+  const handleFavorite = () => {
+     if (isInFavoriteProduct) {
+       dispatch(removeFromFavorite(product)); // Remove from favorites
+     } else {
+       dispatch(addToFavorite(product)); // Add to favorites
+     }
+  };
 
   return (
     <nav
@@ -20,7 +37,14 @@ function InnerNavbar({ children }) {
           <div className="font-bold w-fit border-2 bg-black/30  text-center py-1 px-1.5 rounded-full text-white border-none flex justify-between">
             <BackButton>{children}</BackButton>
           </div>
-          <i onClick={()=>setLiked(!liked)} className={`fa-${liked?"solid":"regular"} fa-heart ${liked?"text-red-500":'text-white'} bg-black/30  px-1.5 rounded-full text-lg`}></i>
+          <i
+            onClick={() => handleFavorite()}
+            className={`fa-${
+              isInFavoriteProduct ? "solid" : "regular"
+            } fa-heart ${
+              isInFavoriteProduct ? "text-red-500" : "text-white"
+            } bg-black/30  px-1.5 rounded-full text-lg`}
+          ></i>
         </div>
       ) : (
         <BackButton>{children}</BackButton>

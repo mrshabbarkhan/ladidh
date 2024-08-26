@@ -1,6 +1,7 @@
 import AddToButton from "../../components/AddToButton";
 
 function FavoriteList({ img, pack, tittle, discount, code, price, oldPrice }) {
+
   return (
     <div className="mb-5 Favorites_List drop-shadow-lg flex p-2 rounded-lg">
       <div className="grow ">

@@ -20,6 +20,7 @@ import bannerThree from "../assets/images/banner/banner3.jpg";
 
 export const Sale_Details = [
   {
+    id: 1,
     img: ProductOne,
     pack: "Combo Pack",
     tittle: "Fish + Fish Skinless + Cleaned Prawns",
@@ -29,6 +30,7 @@ export const Sale_Details = [
     discount: "40%",
   },
   {
+    id: 2,
     img: ProductTwo,
     pack: "Combo Pack",
     tittle: "Meat + Chicken Skinless + Fish",
@@ -38,6 +40,7 @@ export const Sale_Details = [
     discount: "50%",
   },
   {
+    id: 3,
     img: ProductThree,
     pack: "Combo Pack",
     tittle: "Goat + Chicken Skinless + Cleaned Prawns",
@@ -51,25 +54,34 @@ export const Sale_Details = [
 
 export const Tranding_Products = [
   {
+    id: 4,
     img: ProductFour,
     pack: "1Pack",
     tittle: "Goat Meat",
     price: 930,
     oldPrice: 1100,
+    discount: "60%",
+    code: "636G8P",
   },
   {
+    id: 5,
+    code: "636G8P",
     img: ProductFive,
     pack: "1Pack",
     tittle: "Cleaned Prawns",
     price: 430,
     oldPrice: 800,
+    discount: "60%",
   },
   {
+    id: 6,
     img: ProductSix,
     pack: "1Pack",
+    code: "636G8P",
     tittle: "Cleaned Skinless",
     price: 600,
     oldPrice: 1000,
+    discount: "60%",
   },
 ];
 

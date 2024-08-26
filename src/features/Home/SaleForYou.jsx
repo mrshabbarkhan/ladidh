@@ -8,8 +8,9 @@ function SaleForYou() {
       <h1 className="mb-2">Sale for you</h1>
       <div className="flex gap-5 overflow-x-auto w-full ">
         {Sale_Details.map((dtl, index) => (
-          <Card
+          <Card 
             key={index}
+            id = {dtl.id}
             img={dtl.img}
             pack={dtl.pack}
             tittle={dtl.tittle}
