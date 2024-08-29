@@ -60,4 +60,5 @@ box-shadow: inset 200px 200px 80px 77px rgba(0,0,0,1);
   transition: all 0.5s;
   z-index: 99999; }
   .dark-overlay.active {
-    display: block; }
+    display: block; 
+  }

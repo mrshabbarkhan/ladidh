@@ -2,6 +2,7 @@ import patternImage from "../../assets/images/pattern1.png";
 import Map from "../../assets/ui/Map";
 import MenuSvg from "../../assets/ui/MenuSvg";
 import SearchSvg from "../../assets/ui/SearchSvg";
+import SideBar from "./SideBar";
 
 function Navbar() {
   return (
@@ -22,7 +23,7 @@ function Navbar() {
                 </p>
               </span>
               <div className="border p-2 rounded-lg">
-                <MenuSvg />
+                <MenuSvg Component={SideBar} />
               </div>
             </div>
           </div>

@@ -1,13 +1,26 @@
 import { useState } from "react";
-// import img from "../../assets/images/product/1.jpg";
 import FreeDevSvg from "../../assets/ui/FreeDevSvg";
 import StarSvg from "../../assets/ui/StarSvg";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../Cart/cardSlice";
 
 function ProductDetails() {
   const [tempQty, setTempQty] = useState(1)
-  const { tittle, price, oldPrice, img } = useSelector((state) => state.productDetails.product);
+  const dispatch = useDispatch()
+
+  const { product } = useSelector((state) => state.productDetails);
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const matchProductWithCart = cartItems?.find(item=>item.id === product.id)
+  console.log(matchProductWithCart)
+
+  const { tittle, price, oldPrice, img } = product;
+
+  function handleCart() {
+    dispatch(addToCart(product))
+  }
+
   return (
     <>
       <div className="box_shadow absolute top-0 left-0 right-0 object-cover ">
@@ -53,7 +66,7 @@ function ProductDetails() {
       </div>
       <div className="w-full bg-white text-center z-30 px-2  py-3 fixed bottom-0 left-0">
           <Link to={"/cart"}>
-        <div className="z-30 bg-primary text-md font-semibold py-2 max-w-5xl rounded-xl m-auto text-white">
+        <div onClick={()=>handleCart()} className="z-30 bg-primary text-md font-semibold py-2 max-w-5xl rounded-xl m-auto text-white">
           ADD TO CART
         </div>
           </Link>
