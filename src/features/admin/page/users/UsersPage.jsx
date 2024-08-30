@@ -53,7 +53,7 @@ export default function UsersPage() {
             <p className="text-gray-600">
               <span className="font-medium">Address:</span> {customer.address}
             </p>
-            <button className="mt-4 bg-blue-500 text-white rounded-full px-4 py-2 text-sm hover:bg-blue-600 transition-all">
+            <button className="mt-4 bg-blue-500 text-white rounded-lg px-4 py-2 text-sm hover:bg-blue-600 transition-all">
               View Details
             </button>
           </div>

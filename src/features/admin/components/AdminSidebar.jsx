@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const AdminSidebar = () => {
   return (
-    <nav className="author-box h-screen w-52 bg-primary">
+    <nav className="author-box h-screen w-52 bg-gray-200">
       <ul className="flex flex-col  gap-4 text-left pl-5 pt-5 text-lg text-white">
         <NavLink
           to={"/admin"}
@@ -12,7 +12,7 @@ const AdminSidebar = () => {
             ` ${
               isActive
                 ? "bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white"
-                : ""
+                : "text-gray-600"
             }`
           }
         >
@@ -26,7 +26,7 @@ const AdminSidebar = () => {
             ` ${
               isActive
                 ? "bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white"
-                : ""
+                : "text-gray-600"
             }`
           }
         >
@@ -40,7 +40,7 @@ const AdminSidebar = () => {
             ` ${
               isActive
                 ? "bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white"
-                : ""
+                : "text-gray-600"
             }`
           }
         >
@@ -54,7 +54,7 @@ const AdminSidebar = () => {
             ` ${
               isActive
                 ? "bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white"
-                : ""
+                : "text-gray-600"
             }`
           }
         >

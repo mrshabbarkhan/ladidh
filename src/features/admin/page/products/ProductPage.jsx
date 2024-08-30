@@ -17,9 +17,15 @@ function ProductPage() {
         <SearchBar placeholder={"search by products..."} />
       </div>
       <div className="flex justify-start gap-5 flex-wrap">
-        {filteredProducts.map((dts, index) => {
-          return <ProductCard key={index} id={dts.id} info={dts} />;
-        })}
+        {filteredProducts.length ? (
+          filteredProducts.map((dts, index) => {
+            return <ProductCard key={index} id={dts.id} info={dts} />;
+          })
+        ) : (
+          <h1 className="text-center text-xl text-red-600 font-medium">
+            No match found
+          </h1>
+        )}
       </div>
     </section>
   );

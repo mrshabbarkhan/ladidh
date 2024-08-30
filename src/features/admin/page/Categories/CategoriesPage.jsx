@@ -19,19 +19,27 @@ const CategoriesPage = () => {
      );
   return (
     <section>
-      <h1 className="font-bold text-2xl text-center tracking-wide ">Categories</h1>
+      <h1 className="font-bold text-2xl text-center tracking-wide ">
+        Categories
+      </h1>
       <div className="my-3 mb-10 flex justify-center">
         <SearchBar placeholder={"serach by category..."} />
       </div>
       <Category>
-        {filterbyCategory.map((dts, index) => (
-          <Categories
-            key={index}
-            img={dts.img}
-            tittle={dts.tittle}
-            redirect={"/admin"}
-          />
-        ))}
+        {filterbyCategory.length ? (
+          filterbyCategory.map((dts, index) => (
+            <Categories
+              key={index}
+              img={dts.img}
+              tittle={dts.tittle}
+              redirect={"/admin"}
+            />
+          ))
+        ) : (
+          <h1 className="text-center text-xl text-red-600 font-medium">
+            No match found
+          </h1>
+        )}
       </Category>
     </section>
   );

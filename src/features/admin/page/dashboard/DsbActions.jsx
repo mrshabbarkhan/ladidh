@@ -4,7 +4,7 @@ function DsbActions() {
       <div className="bg-purple-700  flex items-center justify-between grow md:grow-0 w-52 rounded-lg text-white p-2 Favorites_List">
         <span>
           <p>ORDER PENDING</p>
-          <h1 className="font-bold text-xl">2</h1>
+          <h1 className="font-bold text-xl">1</h1>
         </span>
         <div className="bg-white/30 text-2xl p-2 rounded-full">
           <i className="fa-regular fa-clock "></i>

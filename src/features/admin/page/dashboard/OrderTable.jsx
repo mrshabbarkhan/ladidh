@@ -87,7 +87,7 @@ const OrderTable = () => {
      Delivered: "bg-green-100 text-green-500 ",
      Pending: "bg-yellow-100 text-yellow-500",
      Process: "bg-blue-100 text-blue-500",
-     Canceled: "bg-red-100 text-red-500", // Add more statuses and colors as needed
+     Canceled: "bg-red-100 text-red-500", 
    };
 
   return (
@@ -104,7 +104,7 @@ const OrderTable = () => {
           </tr>
         </thead>
         <tbody>
-          {filterOrderById.map((order, index) => (
+          {filterOrderById.length ? filterOrderById.map((order, index) => (
             <tr key={index} className="text-center">
               <td className="px-4 py-2  ">{order.orderId}</td>
               <td className="px-4 py-2  ">{order.paymentMethod}</td>
@@ -119,9 +119,9 @@ const OrderTable = () => {
                   {order.status}
                 </span>
               </td>
-              <td className="px-4 py-2  ">{order.total}</td>
+              <td className="px-4 py-2 ">{order.total}</td>
             </tr>
-          ))}
+          )) : <h1 className="text-center text-red-600 font-medium">No match found</h1>}
         </tbody>
       </table>
     </div>
