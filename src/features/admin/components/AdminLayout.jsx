@@ -1,7 +1,7 @@
 import React from "react";
 import AdminSidebar from "./AdminSidebar";
 import { Outlet } from "react-router-dom";
-import MenuSvg from "../../assets/ui/MenuSvg";
+import MenuSvg from "../../../assets/ui/MenuSvg";
 import SmallScreenSidebar from "./SmallScreenSidebar";
 
 const AdminLayout = () => {

@@ -1,6 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const OrderTable = () => {
+  const debouncedTerm = useSelector((state) => state.search.debouncedTerm);
+
   const orders = [
     {
       orderId: "12345",
@@ -23,7 +26,7 @@ const OrderTable = () => {
       paymentMethod: "Debit Card",
       orderDate: "2024-08-27",
       deliveryDate: "2024-09-01",
-      status: "Processing",
+      status: "Process",
       total: "$75.00",
     },
     {
@@ -31,7 +34,7 @@ const OrderTable = () => {
       paymentMethod: "Debit Card",
       orderDate: "2024-08-27",
       deliveryDate: "2024-09-01",
-      status: "Processing",
+      status: "Process",
       total: "$75.00",
     },
     {
@@ -39,7 +42,7 @@ const OrderTable = () => {
       paymentMethod: "Debit Card",
       orderDate: "2024-08-27",
       deliveryDate: "2024-09-01",
-      status: "Processing",
+      status: "Process",
       total: "$75.00",
     },
     {
@@ -47,7 +50,7 @@ const OrderTable = () => {
       paymentMethod: "Debit Card",
       orderDate: "2024-08-27",
       deliveryDate: "2024-09-01",
-      status: "Processing",
+      status: "Process",
       total: "$75.00",
     },
     {
@@ -55,7 +58,7 @@ const OrderTable = () => {
       paymentMethod: "Debit Card",
       orderDate: "2024-08-27",
       deliveryDate: "2024-09-01",
-      status: "Processing",
+      status: "Process",
       total: "$75.00",
     },
     {
@@ -63,7 +66,7 @@ const OrderTable = () => {
       paymentMethod: "Debit Card",
       orderDate: "2024-08-27",
       deliveryDate: "2024-09-01",
-      status: "Processing",
+      status: "Process",
       total: "$75.00",
     },
     {
@@ -71,10 +74,21 @@ const OrderTable = () => {
       paymentMethod: "Debit Card",
       orderDate: "2024-08-27",
       deliveryDate: "2024-09-01",
-      status: "Processing",
+      status: "Process",
       total: "$75.00",
     },
   ];
+
+  const filterOrderById = orders.filter((order) =>
+    order.orderId.toLowerCase().includes(debouncedTerm.toLowerCase())
+  );
+
+   const statusColors = {
+     Delivered: "bg-green-100 text-green-500 ",
+     Pending: "bg-yellow-100 text-yellow-500",
+     Process: "bg-blue-100 text-blue-500",
+     Canceled: "bg-red-100 text-red-500", // Add more statuses and colors as needed
+   };
 
   return (
     <div className="overflow-x-auto rounded-md">
@@ -90,26 +104,22 @@ const OrderTable = () => {
           </tr>
         </thead>
         <tbody>
-          {orders.map((order, index) => (
+          {filterOrderById.map((order, index) => (
             <tr key={index} className="text-center">
+              <td className="px-4 py-2  ">{order.orderId}</td>
+              <td className="px-4 py-2  ">{order.paymentMethod}</td>
+              <td className="px-4 py-2  ">{order.orderDate}</td>
+              <td className="px-4 py-2  ">{order.deliveryDate}</td>
               <td className="px-4 py-2  ">
-                {order.orderId}
+                <span
+                  className={`inline-block px-3 py-1 rounded-lg text-white ${
+                    statusColors[order.status] 
+                  }`}
+                >
+                  {order.status}
+                </span>
               </td>
-              <td className="px-4 py-2  ">
-                {order.paymentMethod}
-              </td>
-              <td className="px-4 py-2  ">
-                {order.orderDate}
-              </td>
-              <td className="px-4 py-2  ">
-                {order.deliveryDate}
-              </td>
-              <td className="px-4 py-2  ">
-                {order.status}
-              </td>
-              <td className="px-4 py-2  ">
-                {order.total}
-              </td>
+              <td className="px-4 py-2  ">{order.total}</td>
             </tr>
           ))}
         </tbody>

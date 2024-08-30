@@ -34,20 +34,36 @@ const AdminSidebar = () => {
           <span>Products</span>
         </NavLink>
 
-        <li>
+        <NavLink
+          to={"/admin/category"}
+          className={({ isActive }) =>
+            ` ${
+              isActive
+                ? "bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white"
+                : ""
+            }`
+          }
+        >
           <span>
             <i className="fa-solid fa-list mr-2"></i>Categories
           </span>
-        </li>
-        <li>
+        </NavLink>
+        <NavLink
+          to={"/admin/users"}
+          className={({ isActive }) =>
+            ` ${
+              isActive
+                ? "bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white"
+                : ""
+            }`
+          }
+        >
           <span>
-            <i className="fa-solid fa-bag-shopping mr-2"></i>Orders
+            <i className="fa-solid fa-people-group mr-2"></i>Users
           </span>
-        </li>
+        </NavLink>
         <li>
-          <span>
-            <i className="fa-solid fa-people-group mr-2"></i>Customers
-          </span>
+          <span></span>
         </li>
       </ul>
     </nav>
