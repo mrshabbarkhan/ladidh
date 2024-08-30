@@ -16,7 +16,7 @@ function ProductPage() {
       <div className="mb-5 mt-3 flex justify-center">
         <SearchBar placeholder={"search by products..."} />
       </div>
-      <div className="flex justify-start gap-5 flex-wrap">
+      <div className="flex justify-center sm:justify-start gap-5 flex-wrap">
         {filteredProducts.length ? (
           filteredProducts.map((dts, index) => {
             return <ProductCard key={index} id={dts.id} info={dts} />;
