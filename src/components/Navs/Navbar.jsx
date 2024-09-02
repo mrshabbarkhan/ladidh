@@ -1,11 +1,26 @@
+import { useEffect, useState } from "react";
 import patternImage from "../../assets/images/pattern1.png";
 import Map from "../../assets/ui/Map";
 import MenuSvg from "../../assets/ui/MenuSvg";
 import SearchSvg from "../../assets/ui/SearchSvg";
 import AuthButton from "../../features/auth/AuthButton";
+import { useLocation } from "../../utils/utils";
 import SideBar from "./SideBar";
 
 function Navbar() {
+
+    const [location, setLocation] = useState("Fetching location...");
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+      async function fetchLocation() {
+        const locationName = await useLocation(); 
+        setLocation(locationName); 
+      }
+
+      fetchLocation();
+    }, []);
+
   return (
     <section className="fixed right-0 left-0 top-0 z-20 ">
       <header
@@ -17,10 +32,10 @@ function Navbar() {
           <div className="flex items-center">
             <Map />
             <div className="ml-2 text-white flex items-center justify-between w-full">
-              <span className="leading-4">
+              <span className="leading-4 max-w-80">
                 <h1 className="font-bold text-lg">Ladhidh</h1>
-                <p className="font-medium text-slate-50 text-sm ">
-                  Rkpuram sector-b near chawla circle....
+                <p className="font-medium text-slate-50 text-sm line-clamp-2">
+                 {location}
                 </p>
               </span>
               <div className="flex items-center gap-10">

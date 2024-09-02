@@ -141,3 +141,24 @@ export const NavItems = [
 ];
 
 export const OfferBanners = [bannerOne, bannerTwo, bannerThree];
+
+export async function useLocation() {
+  try {
+    const position = await new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;
+
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+    );
+    const data = await response.json();
+
+    return data.display_name;
+  } catch (error) {
+    console.error("Error fetching location:", error);
+    return "Could not retrieve location";
+  }
+}
