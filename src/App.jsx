@@ -1,11 +1,7 @@
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import { lazy, Suspense } from "react";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "./store";
 import PageNotFound from "./components/PageNotFound";
 import AdminLayout from "./features/admin/components/AdminLayout";
@@ -13,6 +9,7 @@ import DashboardPage from "./features/admin/page/dashboard/DashboardPage";
 import ProductPage from "./features/admin/page/products/ProductPage";
 import CategoriesPage from "./features/admin/page/Categories/CategoriesPage";
 import UsersPage from "./features/admin/page/users/UsersPage";
+import ProtectedRoute from "./features/admin/components/ProtectedRoute";
 
 const HomePage = lazy(() => import("./features/Home/HomePage"));
 const CategoryPage = lazy(() => import("./features/Category/CategoryPage"));
@@ -28,47 +25,57 @@ const ProductDetails = lazy(() =>
 const OrderPage = lazy(() => import("./features/Order/OrderPage"));
 const PaymentPage = lazy(() => import("./features/Payment/PaymentPage"));
 
-const isAdmin = true;
+function RoutesWrapper() {
+  const { isAdmin } = useSelector((state) => state.search);
 
-const userRoutes = {
-  path: "/",
-  element: <AppLayout />,
-  children: [
+
+  const combinedRoutes = [
     {
       path: "/",
-      element: isAdmin ? <Navigate to="/admin" replace /> : <HomePage />,
+      element: <AppLayout />,
+      children: [
+        { path: "/", element: <HomePage /> },
+        { path: "/category", element: <CategoryPage /> },
+        { path: "/favorites", element: <FavoritesPage /> },
+        { path: "/cart", element: <CartPage /> },
+        { path: "/profile", element: <ProfilePage /> },
+        { path: "/product-list", element: <ProductListPage /> },
+        { path: "/product-details", element: <ProductDetails /> },
+        { path: "/orders", element: <OrderPage /> },
+        { path: "/payment", element: <PaymentPage /> },
+      ],
+      errorElement: <PageNotFound />,
     },
-    { path: "/category", element: <CategoryPage /> },
-    { path: "/favorites", element: <FavoritesPage /> },
-    { path: "/cart", element: <CartPage /> },
-    { path: "/profile", element: <ProfilePage /> },
-    { path: "/product-list", element: <ProductListPage /> },
-    { path: "/product-details", element: <ProductDetails /> },
-    { path: "/orders", element: <OrderPage /> },
-    { path: "/payment", element: <PaymentPage /> },
-  ],
-  errorElement: <PageNotFound />,
-};
 
-const adminRoutes = {
-  path: "/admin",
-  element: <AdminLayout />,
-  children: [
-    { index: true, element: <DashboardPage /> },
-    { path: "/admin/products", element: <ProductPage /> },
-    { path: "/admin/category", element: <CategoriesPage /> },
-    { path: "/admin/users", element: <UsersPage /> },
-    
-  ],
-};
+    ...(isAdmin
+      ? [
+          {
+            path: "/admin",
+            element: (
+              <ProtectedRoute isAdmin={isAdmin} element={<AdminLayout />} />
+            ),
+            children: [
+              { index: true, element: <DashboardPage /> },
+              { path: "/admin/products", element: <ProductPage /> },
+              { path: "/admin/category", element: <CategoriesPage /> },
+              { path: "/admin/users", element: <UsersPage /> },
+            ],
+            errorElement: <PageNotFound />,
+          },
+        ]
+      : []),
+  ];
 
-const router = createBrowserRouter([isAdmin ? adminRoutes : userRoutes]);
+  const router = createBrowserRouter(combinedRoutes);
+
+  return <RouterProvider router={router} />;
+}
 
 function App() {
   return (
     <Provider store={store}>
       <Suspense fallback={<div>Loading....</div>}>
-        <RouterProvider router={router} />
+        <RoutesWrapper />
       </Suspense>
     </Provider>
   );

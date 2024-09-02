@@ -8,18 +8,20 @@ import ProfileSvg from "../../assets/ui/ProfileSvg";
 import UserImage from "../../assets/images/avatar/5.jpg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function SideBar({ on, setOn }) {
   const [toggle, setToggle] = useState(false);
+  const {isAdmin} = useSelector(state=>state.search)
   return (
     <>
       <div
-        className={`dark-overlay ${on || "active"}`}
+        className={`dark-overlay ${!on || "active"}`} //changed
         onClick={() => setOn(!on)}
       ></div>
       <div
         className={`sidebar fixed inset-y-0 left-0 w-[260px] z-[999999] transition-all duration-500 ${
-          !on ? "flex" : "hidden"
+          on ? "flex" : "hidden" // changed
         } flex-col overflow-y-scroll bg-white`}
         onClick={() => setOn(!on)}
       >
@@ -42,7 +44,6 @@ function SideBar({ on, setOn }) {
             <Link
               to={"/"}
               className="nav-link flex items-center text-black py-2"
-              href="index.html"
             >
               <span className="dz-icon mr-2">
                 <HomeSvg />
@@ -83,6 +84,18 @@ function SideBar({ on, setOn }) {
               </span>
             </a>
           </li>
+
+          {isAdmin&&<li>
+            <Link to={"/admin"} className="nav-link flex items-center text-black py-2 relative">
+              <span className="dz-icon mr-2">
+                <i className="fa-solid fa-gauge mr-2 text-gray-300"></i>
+              </span>
+              <span>Dashboard</span>
+              <span className="badge bg-info text-white absolute top-0 right-0 text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                5
+              </span>
+            </Link>
+          </li>}
 
           <li>
             <a className="nav-link flex items-center text-black py-2">

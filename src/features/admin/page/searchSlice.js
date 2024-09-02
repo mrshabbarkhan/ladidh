@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   searchTerm: "",
   debouncedTerm: "",
+  isAdmin : true,
 };
 
 const searchSlice = createSlice({

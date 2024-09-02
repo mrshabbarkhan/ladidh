@@ -28,6 +28,7 @@ function AppLayout() {
         <main className="pt-5">
           <Outlet />
         </main>
+        
         {!pathName5 ? <NavigationBar /> : null}
       </div>
     </>

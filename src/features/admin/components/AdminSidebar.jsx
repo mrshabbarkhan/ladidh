@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const AdminSidebar = () => {
   return (
-    <nav className="author-box h-screen w-52 bg-gray-200">
+    <nav className="author-box h-screen w-52 bg-gray-200 relative overflow-hidden">
       <ul className="flex flex-col  gap-4 text-left pl-5 pt-5 text-lg text-white">
         <NavLink
           to={"/admin"}
@@ -11,8 +11,8 @@ const AdminSidebar = () => {
           className={({ isActive }) =>
             ` ${
               isActive
-                ? "bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white"
-                : "text-gray-600"
+                ? "bg-white w-full px-2 py-1 rounded-l-xl flex items-center text-gray-900"
+                : "text-gray-500"
             }`
           }
         >
@@ -25,8 +25,8 @@ const AdminSidebar = () => {
           className={({ isActive }) =>
             ` ${
               isActive
-                ? "bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white"
-                : "text-gray-600"
+                ? "bg-white w-full px-2 py-1 rounded-l-xl flex items-center text-gray-900"
+                : "text-gray-500"
             }`
           }
         >
@@ -39,8 +39,8 @@ const AdminSidebar = () => {
           className={({ isActive }) =>
             ` ${
               isActive
-                ? "bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white"
-                : "text-gray-600"
+                ? "bg-white w-full px-2 py-1 rounded-l-xl flex items-center text-gray-900"
+                : "text-gray-500"
             }`
           }
         >
@@ -53,8 +53,8 @@ const AdminSidebar = () => {
           className={({ isActive }) =>
             ` ${
               isActive
-                ? "bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white"
-                : "text-gray-600"
+                ? "bg-white w-full px-2 py-1 rounded-l-xl flex items-center text-gray-900"
+                : "text-gray-500"
             }`
           }
         >
@@ -62,9 +62,15 @@ const AdminSidebar = () => {
             <i className="fa-solid fa-people-group mr-2"></i>Users
           </span>
         </NavLink>
-        <li>
-          <span></span>
-        </li>
+
+        <NavLink
+          to={"/"}
+          className="bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white-600 absolute bottom-5"
+        >
+          <span>
+            <i className="fa-solid fa-home mr-2"></i>Home
+          </span>
+        </NavLink>
       </ul>
     </nav>
   );
