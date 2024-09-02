@@ -2,6 +2,7 @@ import patternImage from "../../assets/images/pattern1.png";
 import Map from "../../assets/ui/Map";
 import MenuSvg from "../../assets/ui/MenuSvg";
 import SearchSvg from "../../assets/ui/SearchSvg";
+import AuthButton from "../../features/auth/AuthButton";
 import SideBar from "./SideBar";
 
 function Navbar() {
@@ -22,8 +23,12 @@ function Navbar() {
                   Rkpuram sector-b near chawla circle....
                 </p>
               </span>
-              <div className="border p-2 rounded-lg">
-                <MenuSvg Component={SideBar} />
+              <div className="flex items-center gap-10">
+                <AuthButton/>
+
+                <div className="border p-1 rounded-lg">
+                  <MenuSvg Component={SideBar} />
+                </div>
               </div>
             </div>
           </div>
