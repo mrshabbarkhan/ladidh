@@ -84,10 +84,10 @@ const OrderTable = () => {
   );
 
    const statusColors = {
-     Delivered: "bg-green-100 text-green-500 ",
-     Pending: "bg-yellow-100 text-yellow-500",
-     Process: "bg-blue-100 text-blue-500",
-     Canceled: "bg-red-100 text-red-500", 
+     Delivered: "bg-green-400 text-green-500 ",
+     Pending: "bg-yellow-400 text-white",
+     Process: "bg-blue-400 text-white",
+     Canceled: "bg-red-400 text-white", 
    };
 
   return (

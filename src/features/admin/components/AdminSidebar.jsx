@@ -17,7 +17,7 @@ const AdminSidebar = () => {
           }
         >
           <i className="fa-solid fa-gauge mr-2 "></i>
-          <span>Deshboard</span>
+          <span>Dashboard</span>
         </NavLink>
 
         <NavLink
