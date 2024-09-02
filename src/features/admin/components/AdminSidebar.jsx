@@ -48,6 +48,22 @@ const AdminSidebar = () => {
             <i className="fa-solid fa-list mr-2"></i>Categories
           </span>
         </NavLink>
+
+        <NavLink
+          to={"/admin/banners"}
+          className={({ isActive }) =>
+            ` ${
+              isActive
+                ? "bg-white w-full px-2 py-1 rounded-l-xl flex items-center text-gray-900"
+                : "text-gray-500"
+            }`
+          }
+        >
+          <span>
+            <i class="fa-solid fa-panorama mr-2"></i>Banners
+          </span>
+        </NavLink>
+
         <NavLink
           to={"/admin/users"}
           className={({ isActive }) =>
