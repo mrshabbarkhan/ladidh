@@ -1,8 +1,10 @@
 import { useState } from "react";
-import AuthForm from "./AuthForm";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
 function AuthButton() {
   const [showForm, setShowForm] = useState(false);
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
   const handleClick = (e) => {
     if (e.target.className.includes("overley")) {
       setShowForm(false);
@@ -23,7 +25,11 @@ function AuthButton() {
           className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50 overley"
         >
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-8 relative">
-            <AuthForm />
+            {showRegisterForm ? (
+              <RegisterForm setRegister={setShowRegisterForm} />
+            ) : (
+              <LoginForm setRegister={setShowRegisterForm} />
+            )}
           </div>
         </div>
       )}
