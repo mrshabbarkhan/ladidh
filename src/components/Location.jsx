@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { debounce, useLocation } from "../utils/utils";
 
-import SearchBar from "../features/admin/components/SearchBar";
 
 function Location() {
   const [location, setLocation] = useState("Fetching location...");
   const [searchQry, setSearchQry] = useState("");
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(false);
   const debounceRef = useRef(null);
   const [searchData, setSearchData] = useState(null);
 
