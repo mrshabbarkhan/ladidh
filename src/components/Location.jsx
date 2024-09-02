@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { debounce, useLocation } from "../utils/utils";
-
+import SearchSvg from "../assets/ui/SearchSvg";
 
 function Location() {
   const [location, setLocation] = useState("Fetching location...");
@@ -65,15 +65,18 @@ function Location() {
           onClick={(e) =>
             e.target.className.includes("overley") && setToggle(false)
           }
-          className="absolute h-screen top-0 left-0  z-30 w-full flex pt-24 px-2 md:px-24 lg:px-48 justify-center overley bg-black/50"
+          className="absolute h-screen top-0 left-0  z-30 w-full flex pt-24 px-2 md:px-24 lg:px-48 justify-center overley bg-black/30 "
         >
           <div className=" w-full overley">
-            <input
-              className="p-1 py-2 pl-2 rounded-t-lg w-full text-black"
-              placeholder="search location..."
-              value={searchQry}
-              onChange={handleChange}
-            />
+            <span className="flex bg-white p-1 py-2 pl-2 rounded-t-lg gap-2 -translate-y-1.5 text-black shadow-xl">
+              <SearchSvg />
+              <input
+                className="  w-full outline-none"
+                placeholder="Search location..."
+                value={searchQry}
+                onChange={handleChange}
+              />
+            </span>
             {searchData && (
               <ul className=" z-20 rounded-b-md px-2 py-1 bg-white text-black">
                 {searchData?.map((data, index) => (
