@@ -152,7 +152,8 @@ export async function useLocation() {
     const lng = position.coords.longitude;
 
     const response = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+      // `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+      `https://geocode.maps.co/reverse?lat=${lat}&lon=${lng}&api_key=66d5874d2c283371371612jlg24937f`
     );
     const data = await response.json();
 
@@ -162,3 +163,31 @@ export async function useLocation() {
     return "Could not retrieve location";
   }
 }
+
+
+
+export function debounce(func, delay) {
+  let timeoutId;
+  return function (...args) {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+}
+
+
+export async function searchByLocation(searchQry) {
+  try {
+    const response = await fetch(
+      `https://geocode.maps.co/search?q=${searchQry}&api_key=66d5874d2c283371371612jlg24937f`
+    );
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error fetching location:", error);
+  }
+}
+
+// Apply debounce to the search function
+export const debouncedSearchByLocation = debounce(searchByLocation, 300);
