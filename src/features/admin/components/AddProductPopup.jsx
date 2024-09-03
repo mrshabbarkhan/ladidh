@@ -1,17 +1,57 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addNewProduct, allProducts } from "../../redux/adminAuth/adminActionSlice";
 
 export default function AddProductPopup() {
   const [isOpen, setIsOpen] = useState(false);
-  const [discount, setDiscount] = useState(""); // For conditionally rendering coupon code
+  const [image, setImage] = useState(null);
+  const dispatch = useDispatch();
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
 
+  const [formData, setFormData] = useState({
+    pack: "single pack",
+    title: "",
+    code: "",
+    price: "",
+    discount: "",
+    category: "Fish & Seafood",
+    quantity: "",
+    description: "",
+  });
+
+  const handleImages = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({
+      ...formData,
+      [id]: value,
+      files: { img: image },
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your form submission logic here
-    togglePopup(); // Close the popup on submit
+
+    const data = new FormData();
+    data.append("img", image);
+    data.append("pack", formData.pack);
+    data.append("title", formData.title);
+    data.append("code", formData.code);
+    data.append("price", formData.price);
+    data.append("discount", formData.discount);
+    data.append("category", formData.category);
+    data.append("quantity", formData.quantity);
+    data.append("description", formData.description);
+
+    dispatch(addNewProduct(data));
+    togglePopup();
+    dispatch(allProducts())
   };
 
   return (
@@ -33,7 +73,6 @@ export default function AddProductPopup() {
 
           {/* Popup */}
           <div className="fixed inset-0 flex items-center justify-center z-50 ">
-
             <div className="bg-white rounded-lg p-6 w-full max-w-xl shadow-lg max-h-80 overflow-auto">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Add New Product
@@ -47,8 +86,10 @@ export default function AddProductPopup() {
                   </label>
                   <input
                     type="file"
+                    id="img"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
                     accept="image/*"
+                    onChange={handleImages}
                     required
                   />
                 </div>
@@ -59,6 +100,9 @@ export default function AddProductPopup() {
                     Product Name
                   </label>
                   <input
+                    id="title"
+                    value={formData.title}
+                    onChange={handleChange}
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
                     required
@@ -71,11 +115,14 @@ export default function AddProductPopup() {
                     Pack Type
                   </label>
                   <select
+                    id="pack"
+                    value={formData.pack}
+                    onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
                     required
                   >
-                    <option value="single">Single</option>
-                    <option value="combo">Combo</option>
+                    <option value="single pack">Single pack</option>
+                    <option value="combo pack">Combo pack</option>
                   </select>
                 </div>
 
@@ -85,9 +132,11 @@ export default function AddProductPopup() {
                     Discount (%)
                   </label>
                   <input
+                    id="discount"
                     type="number"
-                    value={discount}
-                    onChange={(e) => setDiscount(e.target.value)}
+                    value={formData.discount}
+                    onChange={handleChange}
+                    placeholder="Discount in percent"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
                     min="0"
                     max="100"
@@ -95,18 +144,21 @@ export default function AddProductPopup() {
                 </div>
 
                 {/* Coupon Code Field (Conditional) */}
-                {discount > 0 && (
-                  <div className="mb-4">
-                    <label className="block text-gray-600 text-sm mb-1">
-                      Coupon Code
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
-                      required
-                    />
-                  </div>
-                )}
+                {/* {formData.discount > 0 && ( */}
+                <div className="mb-4">
+                  <label className="block text-gray-600 text-sm mb-1">
+                    Coupon Code
+                  </label>
+                  <input
+                    id="code"
+                    value={formData.code}
+                    onChange={handleChange}
+                    type="text"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    required
+                  />
+                </div>
+                {/* )} */}
 
                 {/* Price */}
                 <div className="mb-4">
@@ -115,6 +167,9 @@ export default function AddProductPopup() {
                   </label>
                   <input
                     type="number"
+                    id="price"
+                    value={formData.price}
+                    onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
                     required
                   />
@@ -126,6 +181,9 @@ export default function AddProductPopup() {
                     Product Description
                   </label>
                   <textarea
+                    id="description"
+                    value={formData.description}
+                    onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
                     rows="3"
                   />
@@ -137,13 +195,17 @@ export default function AddProductPopup() {
                     Category
                   </label>
                   <select
+                    id="category"
+                    value={formData.category}
+                    onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
                     required
                   >
-                    <option value="electronics">Electronics</option>
-                    <option value="clothing">Clothing</option>
-                    <option value="home">Home</option>
-                    <option value="sports">Sports</option>
+                    <option value="Fish & Seafood">Fish & Seafood</option>
+                    <option value="Mutton - Goat">Mutton - Goat</option>
+                    <option value="Ready to Cook">Ready to Cook</option>
+                    <option value="Steaks & Fillets">Steaks & Fillets</option>
+                    <option value="Poultry">Poultry</option>
                   </select>
                 </div>
 
@@ -154,6 +216,9 @@ export default function AddProductPopup() {
                   </label>
                   <input
                     type="number"
+                    id="quantity"
+                    value={formData.quantity}
+                    onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
                     min="1"
                     required
@@ -169,7 +234,7 @@ export default function AddProductPopup() {
                   </button>
                   <button
                     type="button"
-                    onClick={togglePopup}
+                    onClick={handleSubmit}
                     className="ml-2 px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300"
                   >
                     Cancel

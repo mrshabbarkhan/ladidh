@@ -1,15 +1,15 @@
-import adminServices from "./adminAuthService";
+import adminServices from "./adminActionService";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const adminAuthSlice = createSlice({
+const adminActionSlice = createSlice({
   name: "adminAuth",
   initialState: {
     isLoading: false,
     isSuccess: false,
     isError: false,
     dashboard: [],
-    Products: [],
+    products: [],
     categories: [],
     banners: [],
     users: [],
@@ -34,7 +34,7 @@ const adminAuthSlice = createSlice({
         state.isError = true;
         state.users = [];
       })
-      .addCase(addNewProduct.pending, (state, action) => {
+      .addCase(addNewProduct.pending, (state) => {
         state.isLoading = true;
         state.isSuccess = false;
         state.isError = false;
@@ -43,12 +43,29 @@ const adminAuthSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
+        state.products = [action.payload, ...state.products];
       })
-      .addCase(addNewProduct.rejected, (state, action) => {
+      .addCase(addNewProduct.rejected, (state) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
-      });
+      })
+      .addCase(allProducts.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+        state.isError = false;
+      })
+      .addCase(allProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.products = action.payload
+      })
+      .addCase(allProducts.rejected, (state) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+      })
   },
 });
 
@@ -59,6 +76,17 @@ export const allUsers = createAsyncThunk("FETCH/ALLUSERS", async () => {
     console.log(error);
   }
 });
+
+export const allProducts = createAsyncThunk(
+  "GET/ALLPRODUCTS",
+  async () => {
+    try {
+      return await adminServices.getAllProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 export const addNewProduct = createAsyncThunk(
   "POST/PRODUCTS",
@@ -71,4 +99,15 @@ export const addNewProduct = createAsyncThunk(
   }
 );
 
-export default adminAuthSlice.reducer;
+export const removeProduct = createAsyncThunk(
+  "DELETE/PRODUCTS",
+  async (id) => {
+    try {
+      return await adminServices.deleteProducts(id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export default adminActionSlice.reducer;

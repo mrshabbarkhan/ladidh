@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allUsers } from "../../../redux/adminAuth/adminAuthSlice";
+import { allUsers } from "../../../redux/adminAuth/adminActionSlice";
 
 
 
@@ -38,7 +38,7 @@ const customers = [
 export default function UsersPage() {
   
   const dispatch = useDispatch()
-  const { users } = useSelector((state) => state.adminAuth);
+  const { users } = useSelector((state) => state.adminDashboard);
 
   useEffect(() =>{
     dispatch(allUsers())
@@ -48,9 +48,9 @@ export default function UsersPage() {
     <div className="container mx-auto py-8 px-4">
       <h1 className="text-3xl font-semibold text-center mb-8">Customer List</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {users && users?.map((customer) => (
+        {users && users?.map((customer, idx) => (
           <div
-            key={customer.id}
+            key={idx}
             className="bg-white w-fit shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-300"
           >
             <h2 className="text-xl font-semibold mb-2 text-gray-800">

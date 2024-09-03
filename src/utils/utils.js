@@ -189,5 +189,4 @@ export async function searchByLocation(searchQry) {
   }
 }
 
-// Apply debounce to the search function
 export const debouncedSearchByLocation = debounce(searchByLocation, 300);

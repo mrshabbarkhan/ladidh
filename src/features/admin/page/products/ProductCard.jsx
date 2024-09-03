@@ -1,5 +1,16 @@
+import { useDispatch } from "react-redux";
+import { allProducts, removeProduct } from "../../../redux/adminAuth/adminActionSlice";
+
 function ProductCard({ info }) {
-  const { img, pack, tittle, discount, code, price, oldPrice } = info;
+  const { img, pack, title, discount, code, price, oldPrice, _id } = info;
+
+  const dispatch = useDispatch()
+
+  const handleDelete = (id) => {
+    dispatch(removeProduct(id))
+    dispatch(allProducts());
+  }
+
   return (
     <section className="max-w-[16rem] min-w-[16rem] mb-3 text-wrap rounded-xl p-4 pb-2 bg-white shadow-lg">
       <img
@@ -10,7 +21,7 @@ function ProductCard({ info }) {
       <div className="px-2 mt-1">
         <p className="text-xs font-medium text-primary-dark">{pack}</p>
         <h1 className="mt-2 text-md text-gray-800 leading-6 font-medium">
-          {tittle}
+          {title}
         </h1>
         {discount && (
           <p className="text-xs mt-2 text-orange-500">
@@ -30,7 +41,10 @@ function ProductCard({ info }) {
             <div className="border shadow w-fit py-.5 px-1.5 rounded-lg hover:text-white hover:bg-primary-dark transition-all cursor-pointer">
               <i class="fa-solid fa-pen-to-square"></i>
             </div>
-            <div className="border shadow w-fit py-.5 px-1.5 rounded-lg hover:text-white hover:bg-primary-dark transition-all cursor-pointer">
+            <div
+              onClick={() => handleDelete(_id)}
+              className="border shadow w-fit py-.5 px-1.5 rounded-lg hover:text-white hover:bg-primary-dark transition-all cursor-pointer"
+            >
               <i className="fa fa-trash-alt "></i>
             </div>
           </span>
