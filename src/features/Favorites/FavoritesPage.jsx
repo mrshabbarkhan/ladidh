@@ -1,17 +1,18 @@
 import { useSelector } from "react-redux";
-import { Sale_Details } from "../../utils/utils";
 import FavoriteList from "./FavoriteList";
+
+import datanotfound from "../../../public/notdatafound.jfif";
 
 function FavoritesPage() {
   const { favoriteProducts } = useSelector((state) => state.favoriteProducts);
-  if (favoriteProducts.length==0) {
+  if (favoriteProducts.length == 0) {
     return (
-      <h1 className="text-center text-primary text-2xl">
-        Please Add your favorite item
-      </h1>
+      <div className="flex justify-center object-cover">
+        <img src={datanotfound} className="object-cover object-center -translate-y-6" alt="data not found" />
+      </div>
     );
   }
-  
+
   return (
     <>
       {favoriteProducts.map((dtl, index) => (

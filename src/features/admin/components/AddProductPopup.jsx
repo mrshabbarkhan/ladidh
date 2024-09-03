@@ -31,7 +31,6 @@ export default function AddProductPopup() {
     setFormData({
       ...formData,
       [id]: value,
-      files: { img: image },
     });
   };
 
@@ -51,6 +50,7 @@ export default function AddProductPopup() {
 
     dispatch(addNewProduct(data));
     togglePopup();
+    
     dispatch(allProducts())
   };
 

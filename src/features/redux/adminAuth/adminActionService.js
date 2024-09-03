@@ -22,11 +22,23 @@ const deleteProducts = async (id) => {
   return response.data
 }
 
+const addBanner = async (data) => {
+  const response = await axios.post(base_url + "banner/upload", data);
+  return response.data
+}
+
+const getAllBanners = async () => {
+  const response = await axios.get(base_url + "banner");
+  return response.data
+}
+
 const adminServices = {
   getAllUsers,
   addProducts,
   getAllProducts,
   deleteProducts,
+  addBanner,
+  getAllBanners,
 };
 
 export default adminServices;

@@ -10,6 +10,7 @@ import ProductPage from "./features/admin/page/products/ProductPage";
 import CategoriesPage from "./features/admin/page/Categories/CategoriesPage";
 import UsersPage from "./features/admin/page/users/UsersPage";
 import ProtectedRoute from "./features/admin/components/ProtectedRoute";
+import BannerPage from "./features/admin/page/banners/BannerPage";
 
 const HomePage = lazy(() => import("./features/Home/HomePage"));
 const CategoryPage = lazy(() => import("./features/Category/CategoryPage"));
@@ -59,6 +60,7 @@ function RoutesWrapper() {
               { path: "/admin/products", element: <ProductPage /> },
               { path: "/admin/category", element: <CategoriesPage /> },
               { path: "/admin/users", element: <UsersPage /> },
+              { path: "/admin/banners", element: <BannerPage /> },
             ],
             errorElement: <PageNotFound />,
           },

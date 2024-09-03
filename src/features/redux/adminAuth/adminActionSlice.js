@@ -66,6 +66,22 @@ const adminActionSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
       })
+      .addCase(fetchBanners.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+        state.isError = false;
+      })
+      .addCase(fetchBanners.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.banners = action.payload
+      })
+      .addCase(fetchBanners.rejected, (state) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+      })
   },
 });
 
@@ -109,5 +125,22 @@ export const removeProduct = createAsyncThunk(
     }
   }
 );
+
+export const addNewBanner = createAsyncThunk("ADD/BANNER", async (data) => {
+  try {
+    return await adminServices.addBanner(data)
+  } catch (error) {
+    console.log(error.response.data)
+  }
+})
+
+
+export const fetchBanners = createAsyncThunk("FETCH/BANNER", async () => {
+  try {
+    return await adminServices.getAllBanners()
+  } catch (error) {
+    console.log(error.response.data)
+  }
+})
 
 export default adminActionSlice.reducer;
