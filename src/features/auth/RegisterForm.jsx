@@ -1,16 +1,23 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../redux/userAuth/authSlice";
+
 
 
 function RegisterForm({ setRegister }) {
 
   const dispatch = useDispatch()
+   const { isSuccess } = useSelector((state) => state.userAuth);
+   useEffect(() => {
+     if (isSuccess) {
+       return navigate("/");
+     }
+   }, [isSuccess]);
 
-  const [next, setNext] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    contact: "",
-    address: "",
+    number: "",
+    Addres: "",
     password: "",
     email: "",
     otp: "",
@@ -25,32 +32,27 @@ function RegisterForm({ setRegister }) {
     }));
   };
 
-  const handleNext = (e) => {
-    e.preventDefault();
+  // const handleNext = (e) => {
+  //   e.preventDefault();
 
-    // Check if all required fields are filled before proceeding
-    if (
-      formData.name &&
-      formData.contact &&
-      formData.address &&
-      formData.password
-    ) {
-      setNext(true);
-    } else {
-      alert("Please fill in all the fields.");
-    }
-  };
+  //   // Check if all required fields are filled before proceeding
+  //   if (
+  //     formData.name &&
+  //     formData.contact &&
+  //     formData.address &&
+  //     formData.password
+  //   ) {
+  //     setNext(true);
+  //   } else {
+  //     alert("Please fill in all the fields.");
+  //   }
+  // };
 
   const handleVerify = (e) => {
     e.preventDefault();
     console.log(formData)
+    dispatch(registerUser(formData))
 
-
-    // if (formData.email && formData.otp) {
-    //   alert("Verification successful!");
-    // } else {
-    //   alert("Please fill in all fields.");
-    // }
   };
 
   return (
@@ -59,7 +61,7 @@ function RegisterForm({ setRegister }) {
         Sign up
       </h2>
 
-      {next ? (
+      {/* {next ? (
         <form autoComplete="off" onSubmit={handleVerify}>
           <div className="mb-4">
             <label
@@ -106,8 +108,8 @@ function RegisterForm({ setRegister }) {
             Verify
           </button>
         </form>
-      ) : (
-        <form autoComplete="off" onSubmit={handleNext}>
+      ) : ( */}
+        <form  onSubmit={handleVerify}>
           <div className="mb-4">
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
@@ -130,16 +132,35 @@ function RegisterForm({ setRegister }) {
           <div className="mb-4">
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
-              htmlFor="contact"
+              htmlFor="number"
             >
               Contact
             </label>
             <input
-              id="contact"
-              type="text"
+              id="number"
+              type="number"
               value={formData.contact}
               onChange={handleChange}
               placeholder="+91 1234567890"
+              className="w-full px-4 py-1.5 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              required
+              maxLength={10}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label
+              className="block text-sm font-medium text-gray-700 mb-1"
+              htmlFor="email"
+            >
+              Enter your email here
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email here"
               className="w-full px-4 py-1.5 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               required
               autoComplete="off"
@@ -149,14 +170,14 @@ function RegisterForm({ setRegister }) {
           <div className="mb-4">
             <label
               className="block text-sm font-medium text-gray-700 mb-1"
-              htmlFor="address"
+              htmlFor="Addres"
             >
               Address
             </label>
             <input
-              id="address"
+              id="Addres"
               type="text"
-              value={formData.address}
+              value={formData.Addres}
               onChange={handleChange}
               placeholder="Geeta Bhawan, Indore"
               className="w-full px-4 py-1.5 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
@@ -188,10 +209,9 @@ function RegisterForm({ setRegister }) {
             type="submit"
             className="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-300 font-semibold"
           >
-            Next
+            Register
           </button>
         </form>
-      )}
 
       <p
         onClick={() => setRegister(false)}

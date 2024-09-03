@@ -4,6 +4,7 @@ import favoriteProductReducer from "./features/Favorites/favoriteSlice"
 import cartReducer from './features/Cart/cardSlice'
 import searchReducer from "./features/admin/page/searchSlice";
 import userAuthReducer from "./features/redux/userAuth/authSlice"
+import adminAuthReducer from "./features/redux/adminAuth/adminAuthSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     favoriteProducts: favoriteProductReducer,
     cart: cartReducer,
     search: searchReducer,
-    userAuth : userAuthReducer,
+    userAuth: userAuthReducer,
+    adminAuth: adminAuthReducer,
   },
 });
 

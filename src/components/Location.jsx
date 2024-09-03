@@ -49,7 +49,6 @@ function Location() {
     setSearchData(null);
   };
 
-  console.log(searchData);
 
   return (
     <div>

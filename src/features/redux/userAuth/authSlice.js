@@ -1,19 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getOtp } from "./authService";
+import authServices from "./authService";
+
+const userExist = JSON.parse(localStorage.getItem("user")) || null;
 
 const authSLice = createSlice({
   name: "auth",
   initialState: {
+    user: userExist,
     isLoading: false,
     isError: false,
     isSuccess: false,
-    user: null,
     serverOTP: null,
   },
-  reducers: {},
+  reducers: {
+    logOut: (state) => {
+      state.user = null;
+      state.isError = false;
+      state.isSuccess = false;
+      localStorage.removeItem("user");
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchOtp.pending, (state, action) => {
+      // fetchOtp cases
+      .addCase(fetchOtp.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
         state.isSuccess = false;
@@ -24,25 +34,88 @@ const authSLice = createSlice({
         state.isSuccess = true;
         state.serverOTP = action.payload;
       })
-      .addCase(fetchOtp.rejected, (state, action) => {
+      .addCase(fetchOtp.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
         state.serverOTP = null;
+      })
+      // registerUser cases
+      .addCase(registerUser.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+        localStorage.setItem("user", JSON.stringify(action.payload));
+      })
+      .addCase(registerUser.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+      })
+      // loginUser cases
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+        localStorage.setItem("user", JSON.stringify(action.payload));
+      })
+      .addCase(loginUser.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
       });
   },
 });
 
+// Async thunks
 export const fetchOtp = createAsyncThunk(
-  "FETCH/OTP",
+  "auth/fetchOtp",
   async (email, thunkAPI) => {
     try {
-      return await getOtp(email);
+      return await authServices.getOtp(email);
     } catch (error) {
       console.log(error);
-      thunkAPI.rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
-export default authSLice.reducer
+export const registerUser = createAsyncThunk(
+  "auth/registerUser",
+  async (formData, thunkAPI) => {
+    try {
+      return await authServices.register(formData);
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const loginUser = createAsyncThunk(
+  "auth/loginUser",
+  async (formData, thunkAPI) => {
+    try {
+      return await authServices.login(formData);
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const { logOut } = authSLice.actions;
+
+export default authSLice.reducer;

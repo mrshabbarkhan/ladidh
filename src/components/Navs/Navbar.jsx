@@ -4,11 +4,12 @@ import Map from "../../assets/ui/Map";
 import MenuSvg from "../../assets/ui/MenuSvg";
 import SearchSvg from "../../assets/ui/SearchSvg";
 import AuthButton from "../../features/auth/AuthButton";
-import { useLocation } from "../../utils/utils";
 import SideBar from "./SideBar";
 import Location from "../Location";
+import { useSelector } from "react-redux";
 
 function Navbar() {
+  const { user } = useSelector((state) => state.userAuth);
   return (
     <section className="fixed right-0 left-0 top-0 z-20 ">
       <header
@@ -25,7 +26,7 @@ function Navbar() {
                 <Location />
               </span>
               <div className="flex items-center gap-10">
-                <AuthButton />
+               {user ? null : <AuthButton />}
                 <div className="border p-1 rounded-lg">
                   <MenuSvg Component={SideBar} />
                 </div>

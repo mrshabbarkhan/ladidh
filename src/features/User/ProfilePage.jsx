@@ -9,13 +9,13 @@ import LoginForm from "../auth/LoginForm";
 import { useState } from "react";
 
 function ProfilePage() {
-  const { isAdmin } = useSelector((state) => state.search);
+  const { user } = useSelector((state) => state.userAuth);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   
 
   return (
     <div>
-      {isAdmin ? (
+      {user ? (
         <>
           <div className="flex gap-5">
             <UserAvatar />

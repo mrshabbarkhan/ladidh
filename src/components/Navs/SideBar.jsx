@@ -8,11 +8,16 @@ import ProfileSvg from "../../assets/ui/ProfileSvg";
 import UserImage from "../../assets/images/avatar/5.jpg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../../features/redux/userAuth/authSlice";
+
 
 function SideBar({ on, setOn }) {
   const [toggle, setToggle] = useState(false);
-  const {isAdmin} = useSelector(state=>state.search)
+  const { user } = useSelector((state) => state.userAuth);
+  
+  const dispatch = useDispatch()
+
   return (
     <>
       <div
@@ -85,26 +90,36 @@ function SideBar({ on, setOn }) {
             </a>
           </li>
 
-          {isAdmin&&<li>
-            <Link to={"/admin"} className="nav-link flex items-center text-black py-2 relative">
-              <span className="dz-icon mr-2">
-                <i className="fa-solid fa-gauge mr-2 text-gray-300"></i>
-              </span>
-              <span>Dashboard</span>
-              <span className="badge bg-info text-white absolute top-0 right-0 text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                5
-              </span>
-            </Link>
-          </li>}
+          {user?.isAdmin && (
+            <li>
+              <Link
+                to={"/admin"}
+                className="nav-link flex items-center text-black py-2 relative"
+              >
+                <span className="dz-icon mr-2">
+                  <i className="fa-solid fa-gauge mr-2 text-gray-300"></i>
+                </span>
+                <span>Dashboard</span>
+                <span className="badge bg-info text-white absolute top-0 right-0 text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  5
+                </span>
+              </Link>
+            </li>
+          )}
 
-          <li>
-            <a className="nav-link flex items-center text-black py-2">
-              <span className="dz-icon mr-2">
-                <LogoutSvg />
-              </span>
-              <span>Logout</span>
-            </a>
-          </li>
+          {user && (
+            <li>
+              <a
+                className="nav-link flex items-center text-black py-2"
+                onClick={() => dispatch(logOut())}
+              >
+                <span className="dz-icon mr-2">
+                  <LogoutSvg />
+                </span>
+                <span>Logout</span>
+              </a>
+            </li>
+          )}
 
           <li className="nav-label uppercase text-sm font-semibold text-black border-t border-[var(--border-color)] pt-5 mt-5">
             Settings
