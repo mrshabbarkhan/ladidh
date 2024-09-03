@@ -2,6 +2,7 @@ import React from "react";
 import AdminSidebar from "./AdminSidebar";
 
 const SmallScreenSidebar = ({ on, setOn }) => {
+
   return (
     <>
       <div
