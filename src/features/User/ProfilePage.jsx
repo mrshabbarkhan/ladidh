@@ -3,10 +3,16 @@ import OrderActions from "./OrderActions";
 import UserAvatar from "./UserAvatar";
 import UserDetails from "./UserDetails";
 import UserFooter from "./UserFooter";
-import AuthForm from "../auth/AuthForm";
+// import AuthForm from "../auth/AuthForm";
+import RegisterForm from "../auth/RegisterForm";
+import LoginForm from "../auth/LoginForm";
+import { useState } from "react";
 
 function ProfilePage() {
   const { isAdmin } = useSelector((state) => state.search);
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+  
+
   return (
     <div>
       {isAdmin ? (
@@ -23,7 +29,18 @@ function ProfilePage() {
           </section>
         </>
       ) : (
-        <AuthForm />
+        <div
+          // onClick={handleClick}
+          className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50 overley"
+        >
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-8 relative">
+            {showRegisterForm ? (
+              <RegisterForm setRegister={setShowRegisterForm} />
+            ) : (
+              <LoginForm setRegister={setShowRegisterForm} />
+            )}
+          </div>
+        </div>
       )}
     </div>
   );
