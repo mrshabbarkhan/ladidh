@@ -8,6 +8,7 @@ const adminActionSlice = createSlice({
     isLoading: false,
     isSuccess: false,
     isError: false,
+    refetchFlag : false,
     dashboard: [],
     products: [],
     categories: [],
@@ -70,17 +71,38 @@ const adminActionSlice = createSlice({
         state.isLoading = true;
         state.isSuccess = false;
         state.isError = false;
+        state.refetchFlag = false
       })
       .addCase(fetchBanners.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
         state.banners = action.payload
+        state.refetchFlag = false;
       })
       .addCase(fetchBanners.rejected, (state) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
+        state.refetchFlag = false;
+      })
+      .addCase(addNewBanner.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+        state.isError = false;
+        state.refetchFlag = false
+      })
+      .addCase(addNewBanner.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.refetchFlag = true
+      })
+      .addCase(addNewBanner.rejected, (state) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.refetchFlag = false
       })
   },
 });

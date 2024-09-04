@@ -5,12 +5,13 @@ import { Provider, useSelector } from "react-redux";
 import store from "./store";
 import PageNotFound from "./components/PageNotFound";
 import AdminLayout from "./features/admin/components/AdminLayout";
-import DashboardPage from "./features/admin/page/dashboard/DashboardPage";
-import ProductPage from "./features/admin/page/products/ProductPage";
-import CategoriesPage from "./features/admin/page/Categories/CategoriesPage";
-import UsersPage from "./features/admin/page/users/UsersPage";
+const DashboardPage = lazy(() =>import("./features/admin/page/dashboard/DashboardPage"));
+const ProductPage = lazy(() =>import("./features/admin/page/products/ProductPage"));
+const CategoriesPage = lazy(() =>import("./features/admin/page/Categories/CategoriesPage"));
+const UsersPage = lazy(() => import("./features/admin/page/users/UsersPage"));
+const BannerPage = lazy(()=> import("./features/admin/page/banners/BannerPage"));
 import ProtectedRoute from "./features/admin/components/ProtectedRoute";
-import BannerPage from "./features/admin/page/banners/BannerPage";
+import Loader from "./components/Loader";
 
 const HomePage = lazy(() => import("./features/Home/HomePage"));
 const CategoryPage = lazy(() => import("./features/Category/CategoryPage"));
@@ -28,7 +29,6 @@ const PaymentPage = lazy(() => import("./features/Payment/PaymentPage"));
 
 function RoutesWrapper() {
   const { isAdmin } = useSelector((state) => state.search);
-
 
   const combinedRoutes = [
     {
@@ -76,7 +76,7 @@ function RoutesWrapper() {
 function App() {
   return (
     <Provider store={store}>
-      <Suspense fallback={<div>Loading....</div>}>
+      <Suspense fallback={<Loader />}>
         <RoutesWrapper />
       </Suspense>
     </Provider>

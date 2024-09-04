@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const AdminSidebar = () => {
   return (
-    <nav className="author-box h-screen w-52 bg-gray-200 relative overflow-hidden">
+    <nav className="author-box h-screen w-52 bg-gray-200 relative overflow-hidden ">
       <ul className="flex flex-col  gap-4 text-left pl-5 pt-5 text-lg text-white">
         <NavLink
           to={"/admin"}

@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addNewProduct, allProducts } from "../../redux/adminAuth/adminActionSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addNewProduct,
+  allProducts,
+} from "../../redux/adminAuth/adminActionSlice";
 
 export default function AddProductPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
+
+  const { isSuccess } = useSelector((state) => state.adminDashboard);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -50,17 +55,18 @@ export default function AddProductPopup() {
 
     dispatch(addNewProduct(data));
     togglePopup();
-    
-    dispatch(allProducts())
+    if (isSuccess) {
+      dispatch(allProducts());
+    }
   };
 
   return (
     <>
       <button
         onClick={togglePopup}
-        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+        className="px-4 py-1.5  bg-blue-500 font-medium text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
       >
-        Add Product
+        Add
       </button>
 
       {isOpen && (
@@ -72,12 +78,17 @@ export default function AddProductPopup() {
           />
 
           {/* Popup */}
-          <div className="fixed inset-0 flex items-center justify-center z-50 ">
-            <div className="bg-white rounded-lg p-6 w-full max-w-xl shadow-lg max-h-80 overflow-auto">
+          <div
+            onClick={togglePopup}
+            className="fixed inset-0 flex items-center justify-center z-50 "
+          >
+            <div className="bg-white relative rounded-lg p-6 w-full max-w-xl shadow-lg max-h-80 overflow-auto">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Add New Product
               </h2>
-
+              <div className="absolute top-2 right-5">
+                <i class="fa-solid fa-xmark"></i>
+              </div>
               <form onSubmit={handleSubmit}>
                 {/* Image Upload */}
                 <div className="mb-4">
@@ -234,7 +245,7 @@ export default function AddProductPopup() {
                   </button>
                   <button
                     type="button"
-                    onClick={handleSubmit}
+                    onClick={togglePopup}
                     className="ml-2 px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300"
                   >
                     Cancel

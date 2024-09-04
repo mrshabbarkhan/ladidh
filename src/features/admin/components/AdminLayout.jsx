@@ -11,11 +11,11 @@ const AdminLayout = () => {
         <span className="hidden sm:block sticky top-0">
           <AdminSidebar />
         </span>
-        <div className="border p-2 rounded-lg sm:hidden mx-5 mt-5 w-fit">
+        <div className="border rounded-lg sm:hidden mx-5 mt-5 w-fit">
           <MenuSvg Component={SmallScreenSidebar} />
         </div>
       </div>
-      <section className="p-5 flex-grow">
+      <section className="p-5 flex-grow w-full">
         <Outlet />
       </section>
     </main>

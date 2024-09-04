@@ -24,6 +24,7 @@ const deleteProducts = async (id) => {
 
 const addBanner = async (data) => {
   const response = await axios.post(base_url + "banner/upload", data);
+  console.log(response.data)
   return response.data
 }
 
