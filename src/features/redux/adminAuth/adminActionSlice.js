@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import adminServices from "./adminActionService";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
@@ -45,11 +46,13 @@ const adminActionSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.products = [action.payload, ...state.products];
+        toast.success("Product Added")
       })
       .addCase(addNewProduct.rejected, (state) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
+        toast.error("Something went wrong")
       })
       .addCase(allProducts.pending, (state) => {
         state.isLoading = true;
@@ -97,12 +100,14 @@ const adminActionSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.refetchFlag = true
+        toast.success("Banner Added")
       })
       .addCase(addNewBanner.rejected, (state) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
         state.refetchFlag = false
+        toast.error("Something went wrong")
       })
   },
 });

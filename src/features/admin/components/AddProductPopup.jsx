@@ -73,20 +73,18 @@ export default function AddProductPopup() {
         <div>
           {/* Overlay */}
           <div
-            onClick={togglePopup}
             className="fixed inset-0 bg-black bg-opacity-50 z-40 "
           />
 
           {/* Popup */}
           <div
-            onClick={togglePopup}
             className="fixed inset-0 flex items-center justify-center z-50 "
           >
             <div className="bg-white relative rounded-lg p-6 w-full max-w-xl shadow-lg max-h-80 overflow-auto">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Add New Product
               </h2>
-              <div className="absolute top-2 right-5">
+              <div onClick={togglePopup} className="absolute top-2 right-5">
                 <i class="fa-solid fa-xmark"></i>
               </div>
               <form onSubmit={handleSubmit}>

@@ -15,12 +15,16 @@ function ProductPage() {
   const debouncedTerm = useSelector((state) => state.search.debouncedTerm);
 
   const filteredProducts = products?.filter((prod) =>
-    prod.title?.toLowerCase().includes(debouncedTerm.toLowerCase())
+    prod?.title?.toLowerCase().includes(debouncedTerm.toLowerCase())
   );
 
   useEffect(() => {
     dispatch(allProducts());
   }, []);
+
+  if (isLoading) {
+    console.log("isLoading")
+  }
 
   if (isLoading) {
     return <Loader />;
@@ -38,7 +42,7 @@ function ProductPage() {
         </div>
       </div>
       <div className="flex justify-center sm:justify-start gap-5 flex-wrap">
-        {filteredProducts.length ? (
+        {filteredProducts?.length ? (
           filteredProducts.map((dts, index) => {
             return <ProductCard key={index} info={dts} />;
           })

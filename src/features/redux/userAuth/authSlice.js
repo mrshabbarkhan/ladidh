@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authServices from "./authService";
+import toast from "react-hot-toast";
 
 const userExist = JSON.parse(localStorage.getItem("user")) || null;
 
@@ -18,6 +19,7 @@ const authSLice = createSlice({
       state.isError = false;
       state.isSuccess = false;
       localStorage.removeItem("user");
+      toast.success("Logout Successfully");
     },
   },
   extraReducers: (builder) => {
@@ -52,11 +54,13 @@ const authSLice = createSlice({
         state.isSuccess = true;
         state.user = action.payload;
         localStorage.setItem("user", JSON.stringify(action.payload));
+        toast.success("Register Success")
       })
-      .addCase(registerUser.rejected, (state) => {
+      .addCase(registerUser.rejected, (state,action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
+        toast.error(action.payload.error)
       })
       // loginUser cases
       .addCase(loginUser.pending, (state) => {
@@ -70,11 +74,13 @@ const authSLice = createSlice({
         state.isSuccess = true;
         state.user = action.payload;
         localStorage.setItem("user", JSON.stringify(action.payload));
+        toast.success("Login Success");
       })
-      .addCase(loginUser.rejected, (state) => {
+      .addCase(loginUser.rejected, (state,action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
+        toast.error(action.payload.error);
       });
   },
 });

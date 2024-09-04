@@ -12,18 +12,15 @@ const UsersPage = lazy(() => import("./features/admin/page/users/UsersPage"));
 const BannerPage = lazy(()=> import("./features/admin/page/banners/BannerPage"));
 import ProtectedRoute from "./features/admin/components/ProtectedRoute";
 import Loader from "./components/Loader";
+import { Toaster } from "react-hot-toast";
 
 const HomePage = lazy(() => import("./features/Home/HomePage"));
 const CategoryPage = lazy(() => import("./features/Category/CategoryPage"));
 const FavoritesPage = lazy(() => import("./features/Favorites/FavoritesPage"));
 const CartPage = lazy(() => import("./features/Cart/CartPage"));
 const ProfilePage = lazy(() => import("./features/User/ProfilePage"));
-const ProductListPage = lazy(() =>
-  import("./features/Product-list/ProductListPage")
-);
-const ProductDetails = lazy(() =>
-  import("./features/Product-list/ProductDetails")
-);
+const ProductListPage = lazy(() =>import("./features/Product-list/ProductListPage"));
+const ProductDetails = lazy(() =>import("./features/Product-list/ProductDetails"));
 const OrderPage = lazy(() => import("./features/Order/OrderPage"));
 const PaymentPage = lazy(() => import("./features/Payment/PaymentPage"));
 
@@ -79,6 +76,7 @@ function App() {
       <Suspense fallback={<Loader />}>
         <RoutesWrapper />
       </Suspense>
+      <Toaster />
     </Provider>
   );
 }
