@@ -19,7 +19,7 @@ function ProfilePage() {
         <>
           <div className="flex gap-5">
             <UserAvatar />
-            <UserDetails />
+            <UserDetails user={user} />
           </div>
           <section className="flex items-center justify-around py-6 rounded-xl my-4 Profile_List">
             <OrderActions />
