@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { OfferBanners } from "../../utils/utils";
 
 function OfferForYou() {
   const { banners } = useSelector((state) => state.adminDashboard);

@@ -1,23 +1,29 @@
-import { Sale_Details } from "../../utils/utils";
+import { useSelector } from "react-redux";
 import Card from "../Cart/Card";
 
 function SaleForYou() {
-  const navigateToProductList = "/product-details"
+  const navigateToProductList = "/product-details";
+
+  const { products } = useSelector((state) => state.adminDashboard)
+
+  const showOnlyGreaterDisc = 10
+  const ifProductsHaveDiscount = products.filter(product => product.discount>showOnlyGreaterDisc)
+
   return (
     <section className="mt-6 font-medium text-lg w-full">
       <h1 className="mb-2">Sale for you</h1>
       <div className="flex gap-5 overflow-x-auto w-full ">
-        {Sale_Details.map((dtl, index) => (
-          <Card 
+        {ifProductsHaveDiscount.map((dtl, index) => (
+          <Card
             key={index}
-            id = {dtl.id}
+            id={dtl._id}
             img={dtl.img}
             pack={dtl.pack}
-            tittle={dtl.tittle}
+            tittle={dtl.title}
             discount={dtl.discount}
             code={dtl.code}
             price={dtl.price}
-            oldPrice={dtl.oldPrice}
+            // oldPrice={dtl.oldPrice}
             redirect={navigateToProductList}
           />
         ))}

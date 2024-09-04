@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import NavigationBar from "../../components/Navs/NavigationBar";
 import { Categories_Items } from "../../utils/utils";
 import Categories from "../Category/Categories";
@@ -5,9 +6,21 @@ import Category from "../Category/Category";
 import OfferForYou from "./OfferForYou";
 import SaleForYou from "./SaleForYou";
 import TrendProducts from "./TrendProducts";
+import { useDispatch, useSelector } from "react-redux";
+import { allProducts, fetchBanners } from "../redux/adminAuth/adminActionSlice";
 
 function HomePage() {
   const navigateCategories = "/category";
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(allProducts())
+    dispatch(fetchBanners())
+  }, [])
+
+  const {products} = useSelector(state=>state.adminDashboard)
+
+  
   return (
     <>
       <div
