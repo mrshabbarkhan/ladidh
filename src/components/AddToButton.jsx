@@ -6,7 +6,7 @@ function AddToButton({ redirect = "/cart", ...props }) {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const handleClick = () => {
-    dispatch(addToProductDetails(props));
+    // dispatch(addToProductDetails(props));
     navigate(redirect);
   };
   return (

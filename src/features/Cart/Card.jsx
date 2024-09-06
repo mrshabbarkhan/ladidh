@@ -1,13 +1,23 @@
+import { useNavigate } from "react-router-dom";
 import AddToButton from "../../components/AddToButton";
+import { useDispatch } from "react-redux";
+import { addToProductDetails } from "../Product-list/productDetailSlice";
 
 function Card(props) {
   const { img, pack, tittle, discount, code, price, oldPrice, redirect } = props;
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const handleClick = () => {
+    dispatch(addToProductDetails(props));
+    navigate(redirect)
+  }
   return (
     <section className="max-w-[16rem] min-w-[16rem] mb-3 text-wrap rounded-xl p-4 pb-2 bg-white shadow-lg">
       <img
         src={img}
         alt={img}
         className="object-cover object-center w-full h-40 rounded-t-xl"
+        onClick={handleClick}
       />
       <div className="px-2 mt-1">
         <p className="text-xs font-medium text-primary-dark">{pack}</p>
@@ -28,7 +38,7 @@ function Card(props) {
               {oldPrice}
             </span>
           </span>
-          <AddToButton {...props} redirect={redirect} />
+          <AddToButton {...props} redirect={"/cart"} />
         </div>
       </div>
     </section>

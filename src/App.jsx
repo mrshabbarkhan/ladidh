@@ -25,7 +25,7 @@ const OrderPage = lazy(() => import("./features/Order/OrderPage"));
 const PaymentPage = lazy(() => import("./features/Payment/PaymentPage"));
 
 function RoutesWrapper() {
-  const { isAdmin } = useSelector((state) => state.search);
+  const { user } = useSelector((state) => state.userAuth);
 
   const combinedRoutes = [
     {
@@ -45,12 +45,12 @@ function RoutesWrapper() {
       errorElement: <PageNotFound />,
     },
 
-    ...(isAdmin
+    ...(user.isAdmin
       ? [
           {
             path: "/admin",
             element: (
-              <ProtectedRoute isAdmin={isAdmin} element={<AdminLayout />} />
+              <ProtectedRoute isAdmin={user.isAdmin} element={<AdminLayout />} />
             ),
             children: [
               { index: true, element: <DashboardPage /> },

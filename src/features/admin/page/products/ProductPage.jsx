@@ -22,9 +22,6 @@ function ProductPage() {
     dispatch(allProducts());
   }, []);
 
-  if (isLoading) {
-    console.log("isLoading")
-  }
 
   if (isLoading) {
     return <Loader />;

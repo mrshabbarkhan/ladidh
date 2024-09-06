@@ -2,7 +2,8 @@ import DialSvg from "../../assets/ui/DialSvg"
 import EmailSvg from "../../assets/ui/EmailSvg"
 
 function UserDetails({ user }) {
-  const {name, email, number} = user
+  const { name, email, number } = user
+  console.log(user)
     return (
       <div className="flex justify-between grow">
         <div>

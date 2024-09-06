@@ -3,13 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   searchTerm: "",
   debouncedTerm: "",
-  isAdmin : true,
+  searchLocation: null,
 };
 
 const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
+    setSearchLocation: (state, action) => {
+      console.log(action.payload)
+      state.searchLocation = action.payload;
+    },
     setSearchTerm: (state, action) => {
       state.searchTerm = action.payload;
     },
@@ -19,5 +23,6 @@ const searchSlice = createSlice({
   },
 });
 
-export const { setSearchTerm, setDebouncedTerm } = searchSlice.actions;
+export const { setSearchTerm, setDebouncedTerm, setSearchLocation } =
+  searchSlice.actions;
 export default searchSlice.reducer;

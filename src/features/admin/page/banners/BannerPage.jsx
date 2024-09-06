@@ -38,7 +38,7 @@ function BannerPage() {
 
   return (
     <>
-      <span className="text-xl font-medium">Banners</span>
+      <span className="text-2xl font-medium">Banners</span>
       <input
         type="file"
         accept="image/*"

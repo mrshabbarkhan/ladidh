@@ -81,7 +81,7 @@ const AdminSidebar = () => {
 
         <NavLink
           to={"/"}
-          className="bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white-600 absolute bottom-5"
+          className="bg-blue-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white-600 absolute bottom-5"
         >
           <span>
             <i className="fa-solid fa-home mr-2"></i>Home

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { debounce, useLocation } from "../utils/utils";
+import { useLocation } from "../utils/utils";
 import SearchSvg from "../assets/ui/SearchSvg";
 
 function Location() {

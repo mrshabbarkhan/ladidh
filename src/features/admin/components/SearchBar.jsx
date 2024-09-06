@@ -25,7 +25,7 @@ export default function SearchBar({ placeholder }) {
   };
 
   return (
-    <div className="relative w-full max-w-lg">
+    <div className="relative w-full max-w-lg ml-5 ">
       <input
         type="text"
         className={`w-full py-1.5 px-4 bg-white text-gray-900 rounded-full shadow-md border 
