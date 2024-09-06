@@ -5,11 +5,19 @@ import { Provider, useSelector } from "react-redux";
 import store from "./store";
 import PageNotFound from "./components/PageNotFound";
 import AdminLayout from "./features/admin/components/AdminLayout";
-const DashboardPage = lazy(() =>import("./features/admin/page/dashboard/DashboardPage"));
-const ProductPage = lazy(() =>import("./features/admin/page/products/ProductPage"));
-const CategoriesPage = lazy(() =>import("./features/admin/page/Categories/CategoriesPage"));
+const DashboardPage = lazy(() =>
+  import("./features/admin/page/dashboard/DashboardPage")
+);
+const ProductPage = lazy(() =>
+  import("./features/admin/page/products/ProductPage")
+);
+const CategoriesPage = lazy(() =>
+  import("./features/admin/page/Categories/CategoriesPage")
+);
 const UsersPage = lazy(() => import("./features/admin/page/users/UsersPage"));
-const BannerPage = lazy(()=> import("./features/admin/page/banners/BannerPage"));
+const BannerPage = lazy(() =>
+  import("./features/admin/page/banners/BannerPage")
+);
 import ProtectedRoute from "./features/admin/components/ProtectedRoute";
 import Loader from "./components/Loader";
 import { Toaster } from "react-hot-toast";
@@ -19,8 +27,12 @@ const CategoryPage = lazy(() => import("./features/Category/CategoryPage"));
 const FavoritesPage = lazy(() => import("./features/Favorites/FavoritesPage"));
 const CartPage = lazy(() => import("./features/Cart/CartPage"));
 const ProfilePage = lazy(() => import("./features/User/ProfilePage"));
-const ProductListPage = lazy(() =>import("./features/Product-list/ProductListPage"));
-const ProductDetails = lazy(() =>import("./features/Product-list/ProductDetails"));
+const ProductListPage = lazy(() =>
+  import("./features/Product-list/ProductListPage")
+);
+const ProductDetails = lazy(() =>
+  import("./features/Product-list/ProductDetails")
+);
 const OrderPage = lazy(() => import("./features/Order/OrderPage"));
 const PaymentPage = lazy(() => import("./features/Payment/PaymentPage"));
 
@@ -45,12 +57,15 @@ function RoutesWrapper() {
       errorElement: <PageNotFound />,
     },
 
-    ...(user.isAdmin
+    ...(user?.isAdmin
       ? [
           {
             path: "/admin",
             element: (
-              <ProtectedRoute isAdmin={user.isAdmin} element={<AdminLayout />} />
+              <ProtectedRoute
+                isAdmin={user?.isAdmin}
+                element={<AdminLayout />}
+              />
             ),
             children: [
               { index: true, element: <DashboardPage /> },
