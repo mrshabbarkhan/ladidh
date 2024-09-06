@@ -13,7 +13,7 @@ function SaleForYou() {
     <section className="mt-6 font-medium text-lg w-full">
       <h1 className="mb-2">Sale for you</h1>
       <div className="flex gap-5 overflow-x-auto w-full ">
-        {ifProductsHaveDiscount.map((dtl, index) => (
+        {ifProductsHaveDiscount?.map((dtl, index) => (
           <Card
             key={index}
             id={dtl._id}
