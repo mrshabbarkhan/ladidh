@@ -6,7 +6,7 @@ import Category from "../Category/Category";
 import OfferForYou from "./OfferForYou";
 import SaleForYou from "./SaleForYou";
 import TrendProducts from "./TrendProducts";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { allProducts, fetchBanners } from "../redux/adminAuth/adminActionSlice";
 
 function HomePage() {
@@ -18,8 +18,6 @@ function HomePage() {
     dispatch(fetchBanners())
   }, [])
 
-  const {products} = useSelector(state=>state.adminDashboard)
-
   
   return (
     <>
@@ -27,7 +25,7 @@ function HomePage() {
         className="pt-16 relative overflow-hidden"
       >
         <Category heading={"Categories"}>
-          {Categories_Items.map((dts) => (
+          {Categories_Items?.map((dts) => (
             <Categories key={dts.tittle} img={dts.img} tittle={dts.tittle}  redirect={navigateCategories} />
           ))}
         </Category>
