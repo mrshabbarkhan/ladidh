@@ -8,7 +8,7 @@ function Categories({ img, tittle, redirect }) {
       onClick={() => navigate(redirect)}
     >
       <img className="" src={img} alt={img} />
-      <p className="font-medium">{tittle}</p>
+      <p className="font-semibold">{tittle}</p>
     </div>
   );
 }
