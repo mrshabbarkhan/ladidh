@@ -4,10 +4,10 @@ import Card from "../Cart/Card";
 function SaleForYou() {
   const navigateToProductList = "/product-details";
 
-  const { products } = useSelector((state) => state.adminDashboard)
+  const { products=[] } = useSelector((state) => state.adminDashboard)
 
   const showOnlyGreaterDisc = 10
-  const ifProductsHaveDiscount = products.filter(product => product.discount>showOnlyGreaterDisc)
+  const ifProductsHaveDiscount = products?.filter(product => product.discount>showOnlyGreaterDisc)
 
   return (
     <section className="mt-6 font-medium text-lg w-full">
