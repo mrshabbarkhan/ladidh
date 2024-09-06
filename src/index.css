@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  font-family: "General Sans", sans-serif;
+ font-family: 'Satoshi', sans-serif;
   padding: 0%;
   margin: 0%;
   transition: all 0.2s;
