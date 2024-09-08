@@ -48,11 +48,11 @@ const adminActionSlice = createSlice({
         state.products = [action.payload, ...state.products];
         toast.success("Product Added")
       })
-      .addCase(addNewProduct.rejected, (state) => {
+      .addCase(addNewProduct.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
-        toast.error("Something went wrong")
+        toast.error(action.payload.error)
       })
       .addCase(allProducts.pending, (state) => {
         state.isLoading = true;
@@ -109,6 +109,26 @@ const adminActionSlice = createSlice({
         state.refetchFlag = false
         toast.error("Something went wrong")
       })
+      .addCase(removeBanner.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+        state.isError = false;
+        state.refetchFlag = false
+      })
+      .addCase(removeBanner.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.refetchFlag = true
+        toast.success("Banner Removed Success")
+      })
+      .addCase(removeBanner.rejected, (state) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.refetchFlag = false
+        toast.error("Something went wrong")
+      })
   },
 });
 
@@ -133,11 +153,12 @@ export const allProducts = createAsyncThunk(
 
 export const addNewProduct = createAsyncThunk(
   "POST/PRODUCTS",
-  async (formData) => {
+  async (formData,thunkAPI) => {
     try {
       return await adminServices.addProducts(formData);
     } catch (error) {
       console.log(error);
+      return thunkAPI.rejectWithValue("Something went wrong")
     }
   }
 );
@@ -167,6 +188,17 @@ export const fetchBanners = createAsyncThunk("FETCH/BANNER", async () => {
     return await adminServices.getAllBanners()
   } catch (error) {
     console.log(error.response.data)
+  }
+})
+
+
+export const removeBanner = createAsyncThunk('REMOVE/BANNER', async (id, thunkAPI) => {
+  try {
+    return await adminServices.deleteBanner(id)
+  } catch (error) {
+     
+    console.log(error)
+    return thunkAPI.rejectWithValue(error.response.data)
   }
 })
 

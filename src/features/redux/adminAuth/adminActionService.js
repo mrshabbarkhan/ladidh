@@ -14,6 +14,7 @@ const getAllProducts = async () => {
 
 const addProducts = async (formData) => {
   const response = await axios.post(base_url + "products", formData);
+  console.log(response.data)
   return response.data;
 };
 
@@ -25,6 +26,11 @@ const deleteProducts = async (id) => {
 
 const addBanner = async (data) => {
   const response = await axios.post(base_url + "banner/upload", data);
+  return response.data
+}
+
+const deleteBanner = async (id) => {
+  const response = await axios.delete(base_url + `banner/${id}`);
   return response.data
 }
 
@@ -40,6 +46,7 @@ const adminServices = {
   deleteProducts,
   addBanner,
   getAllBanners,
+  deleteBanner,
 };
 
 export default adminServices;

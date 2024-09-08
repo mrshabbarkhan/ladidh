@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addNewBanner,
   fetchBanners,
+  removeBanner,
 } from "../../../redux/adminAuth/adminActionSlice";
 import Loader from "../../../../components/Loader";
 
@@ -14,6 +15,10 @@ function BannerPage() {
   useEffect(() => {
     dispatch(fetchBanners());
   }, []);
+
+  const handleDelete = (id) => {
+    dispatch(removeBanner(id))
+  }
 
 
   const handleChange = (e) => {
@@ -60,7 +65,7 @@ function BannerPage() {
             <div key={idx} className="relative ">
               <img className="rounded-md h-40 w-80 " src={banner.Img} alt="" />
               <span className="absolute bottom-2 right-2 flex space-x-2 float-end mt-2">
-                <div className="bg-white border shadow w-fit py-.5 px-1.5 rounded-lg hover:text-white hover:bg-primary-dark transition-all cursor-pointer">
+                <div onClick={()=>handleDelete(banner._id)}  className="bg-white border shadow w-fit py-.5 px-1.5 rounded-lg hover:text-white hover:bg-primary-dark transition-all cursor-pointer">
                   <i className="fa fa-trash-alt "></i>
                 </div>
               </span>
