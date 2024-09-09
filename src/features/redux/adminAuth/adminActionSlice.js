@@ -129,6 +129,64 @@ const adminActionSlice = createSlice({
         state.refetchFlag = false
         toast.error("Something went wrong")
       })
+      .addCase(addCategories.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+        state.isError = false;
+        state.refetchFlag = false
+      })
+      .addCase(addCategories.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.refetchFlag = true
+        state.categories = [...state.categories, action.payload];
+        toast.success("Category add Successfully")
+      })
+      .addCase(addCategories.rejected, (state) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.refetchFlag = false
+        toast.error("Something went wrong")
+      })
+      .addCase(removeCategory.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+        state.isError = false;
+        state.refetchFlag = false
+      })
+      .addCase(removeCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.refetchFlag = true
+        toast.success("Category removed Successfully")
+      })
+      .addCase(removeCategory.rejected, (state) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.refetchFlag = false
+        toast.error("Something went wrong")
+      })
+      .addCase(fetchAllCategory.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+        state.isError = false;
+      })
+      .addCase(fetchAllCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.categories = action.payload;
+      })
+      .addCase(fetchAllCategory.rejected, (state) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        toast.error("Something went wrong")
+      })
   },
 });
 
@@ -197,6 +255,36 @@ export const removeBanner = createAsyncThunk('REMOVE/BANNER', async (id, thunkAP
     return await adminServices.deleteBanner(id)
   } catch (error) {
      
+    console.log(error)
+    return thunkAPI.rejectWithValue(error.response.data)
+  }
+})
+
+//  CATEGORY
+export const addCategories = createAsyncThunk('Add/CATEGORY', async (formData, thunkAPI) => {
+  try {
+    return await adminServices.addCategory(formData)
+  } catch (error) {
+    console.log(error)
+    return thunkAPI.rejectWithValue(error.response.data)
+  }
+})
+
+
+export const fetchAllCategory = createAsyncThunk('GET/CATEGORY', async (_, thunkAPI) => {
+  try {
+    return await adminServices.getAllCategory()
+  } catch (error) {
+    console.log(error)
+    return thunkAPI.rejectWithValue(error.response.data)
+  }
+})
+
+
+export const removeCategory = createAsyncThunk('REMOVE/CATEGORY', async (id, thunkAPI) => {
+  try {
+    return await adminServices.deleteCategory(id)
+  } catch (error) {
     console.log(error)
     return thunkAPI.rejectWithValue(error.response.data)
   }

@@ -1,9 +1,14 @@
 import { useState } from "react";
+import { addCategories } from "../../redux/adminAuth/adminActionSlice";
+import { useDispatch } from "react-redux";
+
 
 function AddCategoryPopup() {
-    const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [image, setImage] = useState(null);
   const [categoryTitle, setCategoryTitle] = useState("");
+
+  const dispatch = useDispatch()
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -13,10 +18,16 @@ function AddCategoryPopup() {
     setImage(e.target.files[0]);
   };
 
-  const handleSubmit = () => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData();
     data.append("img", image);
+    data.append("cat_id", crypto.randomUUID())
+    data.append("name", categoryTitle)
+    dispatch(addCategories(data));
+
+    setIsOpen(!isOpen);
   };
 
   return (

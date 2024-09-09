@@ -1,24 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CategoryPage from "../../../Category/CategoryPage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "../../components/SearchBar";
 import Category from "../../../Category/Category";
 import Categories from "../../../Category/Categories";
 
 import { Categories_Items } from "../../../../utils/utils";
-import AddProductPopup from "../../components/AddProductPopup";
 import AddCategoryPopup from "../../components/AddCategoryPopup";
 import CategoryCardForAdmin from "./CategoryCardForAdmin";
+import { fetchAllCategory } from "../../../redux/adminAuth/adminActionSlice";
 
 const CategoriesPage = () => {
-    const debouncedTerm = useSelector((state) => state.search.debouncedTerm);
-    const doubleCategoriesItems = [
-      ...Categories_Items,
-      ...Categories_Items,
-    ];
-     const filterbyCategory = doubleCategoriesItems.filter((ctg) =>
-       ctg.tittle.toLowerCase().includes(debouncedTerm.toLowerCase())
-     );
+  const debouncedTerm = useSelector((state) => state.search.debouncedTerm);
+  const { categories } = useSelector((state) => state.adminDashboard);
+  const dispatch = useDispatch()
+  console.log(categories);
+  const doubleCategoriesItems = [...Categories_Items, ...Categories_Items];
+  const filterbyCategory = categories?.filter((ctg) =>
+    ctg.name.toLowerCase().includes(debouncedTerm.toLowerCase())
+  );
+
+
+  useEffect(() => {
+    dispatch(fetchAllCategory())
+  }, [])
+  
+
+
   return (
     <section>
       <div className="mb-5 mt-3 flex justify-center items-center sm:justify-between">
@@ -35,8 +43,9 @@ const CategoriesPage = () => {
           filterbyCategory.map((dts, index) => (
             <CategoryCardForAdmin
               key={index}
+              id={dts._id}
               img={dts.img}
-              title={dts.tittle}
+              title={dts.name}
               redirect={"/admin"}
             />
           ))

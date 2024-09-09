@@ -1,4 +1,17 @@
-function CategoryCardForAdmin({ img, title }) {
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllCategory, removeCategory } from "../../../redux/adminAuth/adminActionSlice";
+import { useEffect } from "react";
+
+function CategoryCardForAdmin({id, img, title }) {
+  const dispatch = useDispatch()
+  const { refetchFlag } = useSelector((state) => state.adminDashboard);
+
+  useEffect(() => {
+    if (refetchFlag) {
+      dispatch(fetchAllCategory())
+    }
+  }, [refetchFlag]);
+
   return (
     <section className="max-w-[12rem] min-w-[12rem] mb-3 text-wrap rounded-xl p-4 pb-2 bg-white shadow-lg relative">
       <div className="object-fit">
@@ -15,7 +28,7 @@ function CategoryCardForAdmin({ img, title }) {
               <i class="fa-solid fa-pen-to-square cursor-pointer"></i>
             </div>
             <div
-              onClick={() => {}}
+              onClick={() => {dispatch(removeCategory(id))}}
               className="border shadow w-fit py-.5 px-1.5 rounded-lg hover:text-white hover:bg-primary-dark transition-all cursor-pointer"
             >
               <i className="fa fa-trash-alt cursor-pointer"></i>
