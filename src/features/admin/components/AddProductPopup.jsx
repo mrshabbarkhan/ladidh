@@ -11,6 +11,7 @@ export default function AddProductPopup() {
   const dispatch = useDispatch();
 
   const { isSuccess } = useSelector((state) => state.adminDashboard);
+  const { categories } = useSelector((state) => state.adminDashboard);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -72,14 +73,10 @@ export default function AddProductPopup() {
       {isOpen && (
         <div>
           {/* Overlay */}
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 "
-          />
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-40 " />
 
           {/* Popup */}
-          <div
-            className="fixed inset-0 flex items-center justify-center z-50 "
-          >
+          <div className="fixed inset-0 flex items-center justify-center z-50 ">
             <div className="bg-white relative rounded-lg p-6 w-full max-w-xl shadow-lg max-h-80 overflow-auto">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Add New Product
@@ -210,11 +207,11 @@ export default function AddProductPopup() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
                     required
                   >
-                    <option value="Fish & Seafood">Fish & Seafood</option>
-                    <option value="Mutton - Goat">Mutton - Goat</option>
-                    <option value="Ready to Cook">Ready to Cook</option>
-                    <option value="Steaks & Fillets">Steaks & Fillets</option>
-                    <option value="Poultry">Poultry</option>
+                    {categories?.map((category) => (
+                      <>
+                        <option value={`${category.cat_id}`}>{category.name}</option>
+                      </>
+                    ))}
                   </select>
                 </div>
 

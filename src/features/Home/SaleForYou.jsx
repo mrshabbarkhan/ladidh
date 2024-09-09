@@ -6,7 +6,7 @@ function SaleForYou() {
 
   const { products=[] } = useSelector((state) => state.adminDashboard)
 
-  const showOnlyGreaterDisc = 10
+  const showOnlyGreaterDisc = 5
   const ifProductsHaveDiscount = products?.filter(product => product.discount>showOnlyGreaterDisc)
 
   return (

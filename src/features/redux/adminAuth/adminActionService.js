@@ -54,6 +54,13 @@ const deleteCategory = async (id) => {
   return response.data;
 };
 
+const editCategory = async (id, data) => {
+  console.log(id, data)
+  const response = await axios.put(base_url + `category/${id}`, data);
+  console.log(response.data)
+  return response.data;
+};
+
 const adminServices = {
   getAllUsers,
   addProducts,
@@ -65,6 +72,7 @@ const adminServices = {
   addCategory,
   getAllCategory,
   deleteCategory,
+  editCategory,
 };
 
 export default adminServices;

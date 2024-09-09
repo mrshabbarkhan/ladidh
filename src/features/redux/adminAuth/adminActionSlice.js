@@ -170,6 +170,26 @@ const adminActionSlice = createSlice({
         state.refetchFlag = false
         toast.error("Something went wrong")
       })
+      .addCase(editSingleCategory.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+        state.isError = false;
+        state.refetchFlag = false
+      })
+      .addCase(editSingleCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.refetchFlag = true
+        toast.success("Edit Successfully")
+      })
+      .addCase(editSingleCategory.rejected, (state) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.refetchFlag = false
+        toast.error("Something went wrong")
+      })
       .addCase(fetchAllCategory.pending, (state) => {
         state.isLoading = true;
         state.isSuccess = false;
@@ -284,6 +304,16 @@ export const fetchAllCategory = createAsyncThunk('GET/CATEGORY', async (_, thunk
 export const removeCategory = createAsyncThunk('REMOVE/CATEGORY', async (id, thunkAPI) => {
   try {
     return await adminServices.deleteCategory(id)
+  } catch (error) {
+    console.log(error)
+    return thunkAPI.rejectWithValue(error.response.data)
+  }
+})
+
+export const editSingleCategory = createAsyncThunk('EDIT/CATEGORY', async ({ id, data }, thunkAPI) => {
+  console.log(id, data)
+  try {
+    return await adminServices.editCategory(id,data)
   } catch (error) {
     console.log(error)
     return thunkAPI.rejectWithValue(error.response.data)

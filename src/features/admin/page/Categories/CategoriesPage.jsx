@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
-import CategoryPage from "../../../Category/CategoryPage";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "../../components/SearchBar";
-import Category from "../../../Category/Category";
-import Categories from "../../../Category/Categories";
+
 
 import { Categories_Items } from "../../../../utils/utils";
 import AddCategoryPopup from "../../components/AddCategoryPopup";
@@ -14,8 +12,7 @@ const CategoriesPage = () => {
   const debouncedTerm = useSelector((state) => state.search.debouncedTerm);
   const { categories } = useSelector((state) => state.adminDashboard);
   const dispatch = useDispatch()
-  console.log(categories);
-  const doubleCategoriesItems = [...Categories_Items, ...Categories_Items];
+
   const filterbyCategory = categories?.filter((ctg) =>
     ctg.name.toLowerCase().includes(debouncedTerm.toLowerCase())
   );
