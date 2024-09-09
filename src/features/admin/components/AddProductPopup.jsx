@@ -50,7 +50,7 @@ export default function AddProductPopup() {
     data.append("code", formData.code);
     data.append("price", formData.price);
     data.append("discount", formData.discount);
-    data.append("category", formData.category);
+    data.append("cat_id", formData.category);
     data.append("quantity", formData.quantity);
     data.append("description", formData.description);
 
@@ -209,7 +209,7 @@ export default function AddProductPopup() {
                   >
                     {categories?.map((category) => (
                       <>
-                        <option value={`${category.cat_id}`}>{category.name}</option>
+                        <option key={categories._id} value={`${category.cat_id}`}>{category.name}</option>
                       </>
                     ))}
                   </select>
