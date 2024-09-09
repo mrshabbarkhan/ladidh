@@ -1,10 +1,23 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import LogoutSvg from "../../../assets/ui/LogoutSvg";
+import { logOut } from "../../redux/userAuth/authSlice";
 
 const AdminSidebar = () => {
+  const dispatch = useDispatch()
   return (
     <nav className="author-box h-screen w-52 bg-gray-200 relative overflow-hidden ">
       <ul className="flex flex-col  gap-4 text-left pl-5 pt-5 text-lg text-white">
+        <NavLink
+          to={"/"}
+          className=" w-full px-2 py-1 rounded-l-lg text-black flex items-center text-white-600"
+        >
+          <span>
+            <i className="fa-solid fa-home mr-2"></i>Home
+          </span>
+        </NavLink>
+
         <NavLink
           to={"/admin"}
           end
@@ -81,11 +94,19 @@ const AdminSidebar = () => {
 
         <NavLink
           to={"/"}
-          className="bg-blue-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white-600 absolute bottom-5"
+          className="bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white-600 absolute bottom-5"
         >
-          <span>
-            <i className="fa-solid fa-home mr-2"></i>Home
-          </span>
+          <li>
+            <a
+              className="nav-link flex items-center "
+              onClick={() => dispatch(logOut())}
+            >
+              <span className="dz-icon mr-2">
+                <LogoutSvg />
+              </span>
+              <span>Logout</span>
+            </a>
+          </li>
         </NavLink>
       </ul>
     </nav>

@@ -1,19 +1,28 @@
+import { useEffect } from "react";
 import Categories from "./Categories";
-import { Categories_Items } from "../../utils/utils";
 import Category from "./Category";
-const doubleCategoriesItems = [
-  ...Categories_Items,
-  ...Categories_Items,
-  ...Categories_Items,
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllCategory } from "../redux/adminAuth/adminActionSlice";
 
-function CategoryPage({onClick}) {
- const navigateToProducts = "/product-list"
+function CategoryPage({ onClick }) {
+  
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchAllCategory())
+  },[])
+  const navigateToProducts = "/product-list"
+  const { categories } = useSelector((state) => state.adminDashboard);
   return (
     <>
       <Category>
-        {doubleCategoriesItems.map((dts,index) => (
-          <Categories key={index} img={dts.img} tittle={dts.tittle} redirect={onClick || navigateToProducts} />
+        {categories?.map((dts, index) => (
+          <Categories
+            key={index}
+            id= {dts._id}
+            img={dts.img}
+            tittle={dts.name}
+            redirect={onClick || navigateToProducts}
+          />
         ))}
       </Category>
     </>

@@ -4,7 +4,7 @@ import SearchBar from "../../components/SearchBar";
 import ProductCard from "./ProductCard";
 import AddProductPopup from "../../components/AddProductPopup";
 import { useEffect } from "react";
-import { allProducts } from "../../../redux/adminAuth/adminActionSlice";
+import { allProducts, fetchAllCategory } from "../../../redux/adminAuth/adminActionSlice";
 import Loader from "../../../../components/Loader";
 
 function ProductPage() {
@@ -20,6 +20,7 @@ function ProductPage() {
 
   useEffect(() => {
     dispatch(allProducts());
+    dispatch(fetchAllCategory())
   }, []);
 
 

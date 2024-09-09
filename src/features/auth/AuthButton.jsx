@@ -25,6 +25,12 @@ function AuthButton() {
           className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50 overley"
         >
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-8 relative">
+            <div
+              onClick={() => setShowForm(!showForm)}
+              className="text-black absolute right-10 top-5"
+            >
+              <i class="fa-regular fa-circle-xmark"></i>
+            </div>
             {showRegisterForm ? (
               <RegisterForm setRegister={setShowRegisterForm} />
             ) : (
