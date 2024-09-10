@@ -7,11 +7,16 @@ import UserFooter from "./UserFooter";
 import RegisterForm from "../auth/RegisterForm";
 import LoginForm from "../auth/LoginForm";
 import { useState } from "react";
+import EditUserDetails from "./EditUserDetails";
 
 function ProfilePage() {
   const { user } = useSelector((state) => state.userAuth);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
-  
+  const [showEditForm, setShowEditForm] = useState(false)
+
+  if (user && showEditForm) {
+    return <EditUserDetails user={user} seterFn={setShowEditForm} />;
+  }
 
   return (
     <div>
@@ -19,7 +24,7 @@ function ProfilePage() {
         <>
           <div className="flex gap-5">
             <UserAvatar />
-            <UserDetails user={user} />
+            <UserDetails seterFn={setShowEditForm} user={user} />
           </div>
           <section className="flex items-center justify-around py-6 rounded-xl my-4 Profile_List">
             <OrderActions />

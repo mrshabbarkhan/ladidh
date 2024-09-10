@@ -14,7 +14,7 @@ const AdminSidebar = () => {
           className=" w-full px-2 py-1 rounded-l-lg text-black flex items-center text-white-600"
         >
           <span>
-            <i className="fa-solid fa-home mr-2"></i>Home
+            <i className="fa-solid fa-home mr-2 text-blue-500"></i>Home
           </span>
         </NavLink>
 

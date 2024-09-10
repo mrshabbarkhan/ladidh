@@ -20,9 +20,9 @@ function InnerNavbar({ children }) {
 
   const handleFavorite = () => {
      if (isInFavoriteProduct) {
-       dispatch(removeFromFavorite(product)); // Remove from favorites
+       dispatch(removeFromFavorite(product));
      } else {
-       dispatch(addToFavorite(product)); // Add to favorites
+       dispatch(addToFavorite(product)); 
      }
   };
 

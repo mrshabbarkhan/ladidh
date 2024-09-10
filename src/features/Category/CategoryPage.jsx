@@ -10,7 +10,6 @@ function CategoryPage({ onClick }) {
   useEffect(() => {
     dispatch(fetchAllCategory())
   },[])
-  const navigateToProducts = "/product-list"
   const { categories } = useSelector((state) => state.adminDashboard);
   return (
     <>
@@ -21,7 +20,7 @@ function CategoryPage({ onClick }) {
             id= {dts._id}
             img={dts.img}
             tittle={dts.name}
-            redirect={onClick || navigateToProducts}
+            redirect={onClick || `/product-list/${dts.cat_id}`}
           />
         ))}
       </Category>

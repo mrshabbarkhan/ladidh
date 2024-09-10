@@ -49,7 +49,7 @@ function RoutesWrapper() {
         { path: "/favorites", element: <FavoritesPage /> },
         { path: "/cart", element: <CartPage /> },
         { path: "/profile", element: <ProfilePage /> },
-        { path: "/product-list", element: <ProductListPage /> },
+        { path: "/product-list/:id", element: <ProductListPage /> },
         { path: "/product-details", element: <ProductDetails /> },
         { path: "/orders", element: <OrderPage /> },
         { path: "/payment", element: <PaymentPage /> },

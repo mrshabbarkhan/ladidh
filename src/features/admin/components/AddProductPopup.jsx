@@ -55,6 +55,7 @@ export default function AddProductPopup() {
     data.append("description", formData.description);
 
     dispatch(addNewProduct(data));
+    console.log(data)
     togglePopup();
     if (isSuccess) {
       dispatch(allProducts());

@@ -26,7 +26,7 @@ function Navbar() {
                 <Location />
               </span>
               <div className="flex items-center gap-10">
-               {user ? null : <AuthButton />}
+                {user ? null : <AuthButton />}
                 <div className="border p-1 rounded-lg">
                   <MenuSvg Component={SideBar} />
                 </div>
@@ -35,11 +35,11 @@ function Navbar() {
           </div>
         </div>
         <div className="text-center absolute bottom-0 m-auto w-full translate-y-1/2 px-2 md:px-24 lg:px-48  ">
-          <div className="border-2 w-full rounded-xl flex items-center p-2 bg-white focus-within:border-primary-light">
+          <div className="border-2 pl-2 w-full rounded-xl flex items-center bg-white focus-within:border-primary-light">
             <SearchSvg />
             <input
               type="text"
-              className=" focus:outline-none w-full ml-4"
+              className=" focus:outline-none focus:ring-0 focus:border-transparent w-full ml-2 outline-none border-none"
               placeholder="Type product name to search"
             ></input>
           </div>

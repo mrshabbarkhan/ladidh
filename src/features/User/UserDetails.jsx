@@ -1,9 +1,9 @@
 import DialSvg from "../../assets/ui/DialSvg"
 import EmailSvg from "../../assets/ui/EmailSvg"
 
-function UserDetails({ user }) {
+function UserDetails({seterFn, user }) {
   const { name, email, number } = user
-  console.log(user)
+
     return (
       <div className="flex justify-between grow">
         <div>
@@ -17,7 +17,7 @@ function UserDetails({ user }) {
             <p className="text-sm text-slate-400">{number}</p>
           </span>
         </div>
-          <i className="fa-regular fa-pen-to-square"></i>
+          <i onClick={()=>seterFn(true)} className="fa-regular fa-pen-to-square"></i>
       </div>
     );
 }

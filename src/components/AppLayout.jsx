@@ -13,6 +13,7 @@ function AppLayout() {
   const pathName5 = location.pathname === "/product-list" && "Product List";
   const pathName6 = location.pathname === "/orders" && "Orders";
   const pathName7 = location.pathname === "/payment" && "Payment";
+  const pathName8 = location.pathname.startsWith("/product-list") && "Product-list";
 
   return (
     <>
@@ -21,7 +22,7 @@ function AppLayout() {
           <Navbar />
         ) : (
           <InnerNavbar>
-            {pathName1 || pathName2 || pathName3 || pathName4 || pathName5 || pathName6 || pathName7}
+            {pathName1 || pathName2 || pathName3 || pathName4 || pathName5 || pathName6 || pathName7 || pathName8}
           </InnerNavbar>
         )}
 

@@ -5,9 +5,9 @@ function Categories({ img, tittle, redirect }) {
   return (
     <div
       className="flex flex-col items-center"
-      onClick={() => navigate(redirect)}
+      onClick={() => navigate(`${redirect}`)}
     >
-      <img className="" src={img} alt={img} />
+      <img className="h-20 w-16 object-center object-cover rounded-full" src={img} alt={img} />
       <p className="font-semibold">{tittle}</p>
     </div>
   );

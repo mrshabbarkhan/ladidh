@@ -1,15 +1,26 @@
-import { Sale_Details } from "../../utils/utils";
+import { useSelector } from "react-redux";
 import FavoriteList from "../Favorites/FavoriteList";
+import { useParams } from "react-router-dom";
 
 function ProductListPage() {
+  const { products } = useSelector(state => state.adminDashboard)
+  const param = useParams()
+console.log(products)
+
+  const filterByCatId = products.filter(item => item.cat_id === param.id)
+  
+  if (!filterByCatId.length) {
+    return <h1 className="text-center text-lg">No Item Found</h1>
+  }
+
   return (
     <>
-      {Sale_Details.map((dtl, index) => (
+      {filterByCatId?.map((dtl, index) => (
         <FavoriteList
           key={index}
           img={dtl.img}
           pack={dtl.pack}
-          tittle={dtl.tittle}
+          tittle={dtl.title}
           discount={dtl.discount}
           code={dtl.code}
           price={dtl.price}

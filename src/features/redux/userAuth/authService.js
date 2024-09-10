@@ -8,7 +8,6 @@ const base_url = "/api/user/";
 
  const getOtp = async (email) => {
   const response = await axios.post("/send-otp", { email });
-  console.log(response.data);
   return response.data;
 };
 
@@ -20,8 +19,6 @@ const register = async (formData) => {
 
 const login = async(formData) => {
   const response = await axios.post(base_url + "login", formData)
-  // localStorage.setItem("user", JSON.stringify(response.data));
-  console.log(response.data)
   return response.data
 }
 
