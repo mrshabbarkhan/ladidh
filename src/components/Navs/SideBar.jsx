@@ -30,15 +30,17 @@ function SideBar({ on, setOn }) {
         } flex-col overflow-y-scroll bg-white`}
         onClick={() => setOn(!on)}
       >
+        <Link to={"/profile"}>
         <div className="author-box flex items-center bg-primary p-5 ">
-          <div className="dz-media border-2 border-white w-40 h-12 overflow-hidden rounded-md mr-3">
+          <div className="dz-media border-2 border-white w-10 h-10 overflow-hidden object-cover object-center rounded-md mr-3">
             <img src={UserImage} alt="" />
           </div>
-          <div className="dz-info">
-            <h5 className="name text-white mb-0 font-bold">James Hawkins</h5>
-            <span className="text-white text-sm">jameshawkins@mail.com</span>
+          <div className="dz-info ">
+            <h5 className="name text-white mb-0 font-bold">{user ? user.name : "User Not Logged in"}</h5>
+            <div className="text-white text-sm text-balance w-40 line-clamp-1">{user ? user.email : "No email found"}</div>
           </div>
         </div>
+        </Link>
 
         <ul className=" p-4 mb-7">
           <li className="nav-label uppercase text-sm font-semibold text-black ">

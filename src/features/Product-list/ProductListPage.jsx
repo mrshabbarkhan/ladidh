@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 function ProductListPage() {
   const { products } = useSelector(state => state.adminDashboard)
   const param = useParams()
-console.log(products)
 
   const filterByCatId = products.filter(item => item.cat_id === param.id)
   

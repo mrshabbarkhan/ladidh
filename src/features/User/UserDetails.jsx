@@ -13,7 +13,7 @@ function UserDetails({seterFn, user }) {
             <p className="text-sm text-slate-400">{email}</p>
           </span>
           <span className="flex items-center gap-1 mt-2">
-            <DialSvg />
+            {number&&<DialSvg />}
             <p className="text-sm text-slate-400">{number}</p>
           </span>
         </div>
