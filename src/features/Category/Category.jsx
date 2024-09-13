@@ -1,4 +1,13 @@
+import { useSelector } from "react-redux";
+import Loader from "../../components/Loader";
+
 function Category({ children, heading }) {
+  const { isLoading } = useSelector((state) => state.adminDashboard);
+  
+  if (isLoading) {
+  return <Loader/>
+  }
+  
   return (
     <section>
       {heading && <h1 className="font-medium text-lg">{heading}</h1>}

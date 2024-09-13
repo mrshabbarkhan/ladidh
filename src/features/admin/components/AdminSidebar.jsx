@@ -73,7 +73,7 @@ const AdminSidebar = () => {
           }
         >
           <span>
-            <i class="fa-solid fa-panorama mr-2"></i>Banners
+            <i className="fa-solid fa-panorama mr-2"></i>Banners
           </span>
         </NavLink>
 
@@ -97,7 +97,7 @@ const AdminSidebar = () => {
           className="bg-red-500 w-full px-2 py-1 rounded-l-lg flex items-center text-white-600 absolute bottom-5"
         >
           <li>
-            <a
+            <div
               className="nav-link flex items-center "
               onClick={() => dispatch(logOut())}
             >
@@ -105,7 +105,7 @@ const AdminSidebar = () => {
                 <LogoutSvg />
               </span>
               <span>Logout</span>
-            </a>
+            </div>
           </li>
         </NavLink>
       </ul>

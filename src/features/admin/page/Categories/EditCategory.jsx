@@ -50,7 +50,6 @@ function EditCategory({ title, id, setShowPopup, showPopup }) {
                 </label>
                 <input
                   id="title"
-                  defaultValue={title}
                   value={categoryTitle}
                   onChange={(e) => setCategoryTitle(e.target.value)}
                   type="text"

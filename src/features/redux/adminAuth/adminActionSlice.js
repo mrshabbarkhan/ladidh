@@ -241,6 +241,19 @@ export const addNewProduct = createAsyncThunk(
   }
 );
 
+export const editSingleProduct = createAsyncThunk(
+  "PUT/PRODUCTS",
+  async ({id, data},thunkAPI) => {
+    try {
+      return await adminServices.editProducts(id, data);
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue("Something went wrong")
+    }
+  }
+);
+
+
 export const removeProduct = createAsyncThunk(
   "DELETE/PRODUCTS",
   async (id) => {
@@ -311,7 +324,6 @@ export const removeCategory = createAsyncThunk('REMOVE/CATEGORY', async (id, thu
 })
 
 export const editSingleCategory = createAsyncThunk('EDIT/CATEGORY', async ({ id, data }, thunkAPI) => {
-  console.log(id, data)
   try {
     return await adminServices.editCategory(id,data)
   } catch (error) {

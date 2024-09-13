@@ -2,15 +2,15 @@ import { useState } from "react";
 import axios from "axios";
 
 function EditUserDetails({ user, seterFn }) {
+  const [error, setError] = useState("")
   const [formData, setFormData] = useState({
     firstName: user.firstName || "",
     lastName: user.lastName || "",
     email: user.email || "",
     number: user.number || "",
-    streetAddress: user.streetAddress || "",
-    city: user.city || "",
-    region: user.region || "",
-    postalCode: user.postalCode || "",
+    Addres: user.Addres || "",
+    oldPassword: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -23,9 +23,13 @@ function EditUserDetails({ user, seterFn }) {
 
  const handleSubmit = async (e) => {
    e.preventDefault();
-   // Handle form submission
-   console.log("Form data submitted: ", formData);
-   // Example: await axios.post('/api/submit', formData);
+   console.log(user, formData.oldPassword)
+   if (user.password !== formData.oldPassword) {
+     return setError("Old password not matched")
+   } else {
+     console.log("Form data submitted: ", formData);
+   }
+
  };
 
 
@@ -110,6 +114,48 @@ function EditUserDetails({ user, seterFn }) {
 
             <div className="sm:col-span-4">
               <label
+                htmlFor="oldPassword"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Old password
+              </label>
+              <div className="mt-2">
+                <input
+                  id="oldPassword"
+                  name="oldPassword"
+                  type="text"
+                  value={formData.oldpassword}
+                  onChange={handleChange}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            {error && <span className="text-red-400 text-sm">{error}</span>}
+            </div>
+
+
+            <div className="sm:col-span-4">
+              <label
+                htmlFor="Password"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                New password
+              </label>
+              <div className="mt-2">
+                <input
+                  id="Password"
+                  name="password"
+                  type="text"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-4">
+              <label
                 htmlFor="number"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
@@ -149,7 +195,7 @@ function EditUserDetails({ user, seterFn }) {
               </div>
             </div>
 
-            <div className="sm:col-span-2 sm:col-start-1">
+            {/* <div className="sm:col-span-2 sm:col-start-1">
               <label
                 htmlFor="city"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -167,9 +213,9 @@ function EditUserDetails({ user, seterFn }) {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-            </div>
+            </div> */}
 
-            <div className="sm:col-span-2">
+            {/* <div className="sm:col-span-2">
               <label
                 htmlFor="region"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -187,9 +233,9 @@ function EditUserDetails({ user, seterFn }) {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-            </div>
+            </div> */}
 
-            <div className="sm:col-span-2">
+            {/* <div className="sm:col-span-2">
               <label
                 htmlFor="postalCode"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -207,7 +253,7 @@ function EditUserDetails({ user, seterFn }) {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -222,7 +268,7 @@ function EditUserDetails({ user, seterFn }) {
         </button>
         <button
           type="submit"
-          className="rounded-md bg-indigo-600 px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="rounded-md bg-primary px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Save
         </button>

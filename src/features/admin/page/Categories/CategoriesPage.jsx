@@ -7,20 +7,29 @@ import { Categories_Items } from "../../../../utils/utils";
 import AddCategoryPopup from "../../components/AddCategoryPopup";
 import CategoryCardForAdmin from "./CategoryCardForAdmin";
 import { fetchAllCategory } from "../../../redux/adminAuth/adminActionSlice";
+import Loader from "../../../../components/Loader";
 
 const CategoriesPage = () => {
   const debouncedTerm = useSelector((state) => state.search.debouncedTerm);
-  const { categories } = useSelector((state) => state.adminDashboard);
+  const { categories, refetchFlag } = useSelector(
+    (state) => state.adminDashboard
+  );
   const dispatch = useDispatch()
 
   const filterbyCategory = categories?.filter((ctg) =>
     ctg.name.toLowerCase().includes(debouncedTerm.toLowerCase())
   );
 
+  if (refetchFlag) {
+    if (refetchFlag) {
+      return  <Loader/>
+    }
+  }
 
-  useEffect(() => {
-    dispatch(fetchAllCategory())
-  }, [])
+
+    useEffect(() => {
+      dispatch(fetchAllCategory());
+    }, []);
   
 
 

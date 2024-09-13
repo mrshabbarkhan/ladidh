@@ -51,7 +51,7 @@ function AddCategoryPopup() {
                 Add New Category
               </h2>
               <div onClick={togglePopup} className="absolute top-2 right-5">
-                <i class="fa-solid fa-xmark"></i>
+                <i className="fa-solid fa-xmark"></i>
               </div>
               <form onSubmit={handleSubmit}>
                 {/* Product Name */}

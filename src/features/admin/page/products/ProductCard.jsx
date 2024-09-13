@@ -1,14 +1,21 @@
 import { useDispatch } from "react-redux";
 import { allProducts, removeProduct } from "../../../redux/adminAuth/adminActionSlice";
+import { useState } from "react";
+import EditProductPopup from "./EditProductPopup";
 
 function ProductCard({ info }) {
   const { img, pack, title, discount, code, price, oldPrice, _id } = info;
+  const [showEditProduct, setShowEditProduct] = useState(false)
 
   const dispatch = useDispatch()
 
   const handleDelete = (id) => {
     dispatch(removeProduct(id))
     dispatch(allProducts());
+  }
+
+  if (showEditProduct) {
+    return <EditProductPopup setShow={setShowEditProduct} product={info} />
   }
 
   return (
@@ -38,7 +45,7 @@ function ProductCard({ info }) {
             </span>
           </span>
           <span className="flex space-x-2">
-            <div className="border shadow w-fit py-.5 px-1.5 rounded-lg hover:text-white hover:bg-primary-dark transition-all cursor-pointer">
+            <div onClick={()=>setShowEditProduct(true)} className="border shadow w-fit py-.5 px-1.5 rounded-lg hover:text-white hover:bg-primary-dark transition-all cursor-pointer">
               <i class="fa-solid fa-pen-to-square"></i>
             </div>
             <div
