@@ -1,7 +1,7 @@
 import AddToButton from "../../components/AddToButton";
 
-function FavoriteList({ img, pack, tittle, discount, code, price, oldPrice }) {
-
+function FavoriteList(props) {
+  const { img, pack, tittle, discount, code, price, oldPrice } = props
   return (
     <div className="mb-5 Favorites_List drop-shadow-lg flex p-2 rounded-lg">
       <div className="grow ">
@@ -23,9 +23,9 @@ function FavoriteList({ img, pack, tittle, discount, code, price, oldPrice }) {
         </div>
         <p className="text-xs font-medium text-primary-dark">{pack}</p>
       </div>
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-2">
         <img className="w-24 rounded-lg object-cover" src={img} alt="" />
-        <AddToButton/>
+        <AddToButton {...props} />
       </div>
     </div>
   );

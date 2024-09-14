@@ -35,6 +35,7 @@ const authSLice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.serverOTP = action.payload;
+        toast.success("Otp send to you email successfully")
       })
       .addCase(fetchOtp.rejected, (state) => {
         state.isLoading = false;

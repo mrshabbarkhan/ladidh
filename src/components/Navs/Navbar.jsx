@@ -35,7 +35,7 @@ function Navbar() {
           </div>
         </div>
         <div className="text-center absolute bottom-0 m-auto w-full translate-y-1/2 px-2 md:px-24 lg:px-48  ">
-          <div className="border-2 pl-2 w-full rounded-xl flex items-center bg-white focus-within:border-primary-light">
+          <div className="border-2 pl-2 w-full rounded-xl flex items-center bg-white focus-within:border-primary-light overflow-hidden">
             <SearchSvg />
             <input
               type="text"

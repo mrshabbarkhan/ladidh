@@ -24,8 +24,8 @@ function HomePage() {
   return (
     <>
       <div className="pt-16 relative overflow-hidden">
-        <Category heading={"Categories"}>
-          {categories?.map((dts) => (
+        <Category heading={"Categories"} btn={"view all"}>
+          {categories?.slice(0,6).map((dts) => (
             <Categories
               key={dts._id}
               img={dts.img}

@@ -2,32 +2,45 @@ import { useState } from "react";
 import { addCategories } from "../../redux/adminAuth/adminActionSlice";
 import { useDispatch } from "react-redux";
 
-
 function AddCategoryPopup() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState(null);
   const [categoryTitle, setCategoryTitle] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
 
   const handleImages = (e) => {
-    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    if (
+      file &&
+      file.size < 5000000 &&
+      ["image/jpeg", "image/png"].includes(file.type)
+    ) {
+      setImage(file);
+    } else {
+      alert("Please upload a valid image file smaller than 5MB.");
+    }
   };
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
     data.append("img", image);
-    data.append("cat_id", crypto.randomUUID())
-    data.append("name", categoryTitle)
-    dispatch(addCategories(data));
+    data.append("cat_id", crypto.randomUUID());
+    data.append("name", categoryTitle);
+
+    try {
+      await dispatch(addCategories(data));
+    } catch (error) {
+      console.error("Failed to add category:", error);
+    }
 
     setIsOpen(!isOpen);
+    setCategoryTitle("") 
   };
 
   return (

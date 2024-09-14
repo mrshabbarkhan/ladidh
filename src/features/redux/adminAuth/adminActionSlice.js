@@ -40,11 +40,13 @@ const adminActionSlice = createSlice({
         state.isLoading = true;
         state.isSuccess = false;
         state.isError = false;
+        state.refetchFlag = true
       })
       .addCase(addNewProduct.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
+        state.refetchFlag = false;
         state.products = [action.payload, ...state.products];
         toast.success("Product Added")
       })
@@ -52,7 +54,28 @@ const adminActionSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
-        toast.error(action.payload.error)
+        state.refetchFlag = false;
+        // toast.error(action.payload.error)
+      })
+      .addCase(removeProduct.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+        state.isError = false;
+        state.refetchFlag = false
+      })
+      .addCase(removeProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.refetchFlag = true
+        toast.success("Product Removed")
+      })
+      .addCase(removeProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.refetchFlag = false;
+        toast.error("something went wrong")
       })
       .addCase(allProducts.pending, (state) => {
         state.isLoading = true;
@@ -64,6 +87,7 @@ const adminActionSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.products = action.payload
+        state.refetchFlag = false
       })
       .addCase(allProducts.rejected, (state) => {
         state.isLoading = false;
@@ -236,6 +260,7 @@ export const addNewProduct = createAsyncThunk(
       return await adminServices.addProducts(formData);
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.error)
       return thunkAPI.rejectWithValue("Something went wrong")
     }
   }

@@ -1,36 +1,24 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "../../components/SearchBar";
-
-
-import { Categories_Items } from "../../../../utils/utils";
 import AddCategoryPopup from "../../components/AddCategoryPopup";
 import CategoryCardForAdmin from "./CategoryCardForAdmin";
 import { fetchAllCategory } from "../../../redux/adminAuth/adminActionSlice";
-import Loader from "../../../../components/Loader";
 
 const CategoriesPage = () => {
   const debouncedTerm = useSelector((state) => state.search.debouncedTerm);
   const { categories, refetchFlag } = useSelector(
     (state) => state.adminDashboard
   );
+
+  useEffect(() => {
+    dispatch(fetchAllCategory());
+  }, []);
   const dispatch = useDispatch()
 
   const filterbyCategory = categories?.filter((ctg) =>
     ctg.name.toLowerCase().includes(debouncedTerm.toLowerCase())
   );
-
-  if (refetchFlag) {
-    if (refetchFlag) {
-      return  <Loader/>
-    }
-  }
-
-
-    useEffect(() => {
-      dispatch(fetchAllCategory());
-    }, []);
-  
 
 
   return (
@@ -39,7 +27,7 @@ const CategoriesPage = () => {
         <h1 className="font-bold text-2xl text-center tracking-wide absolute top-5 sm:relative sm:top-0">
           Category
         </h1>
-        <div className="mt-10 sm:mt-0 flex w-fit items-center gap-3 absolute right-5 sm:right-14 top-6">
+        <div className="mt-10 px-5 sm:mt-0 flex w-full sm:w-fit items-center gap-3 absolute right-2 sm:right-14 top-6 ">
           <SearchBar placeholder={"search by category..."} />
           <AddCategoryPopup />
         </div>

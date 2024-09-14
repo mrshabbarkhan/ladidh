@@ -14,13 +14,11 @@ const getAllProducts = async () => {
 
 const addProducts = async (formData) => {
   const response = await axios.post(base_url + "products", formData);
-  console.log(response.data);
   return response.data;
 };
 
 const editProducts = async (id,data) => {
-  const response = await axios.put(base_url + `products${id}`, data);
-  console.log(response.data);
+  const response = await axios.put(base_url + `products/${id}`, data);
   return response.data;
 };
 

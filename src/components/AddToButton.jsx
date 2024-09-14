@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { addToProductDetails } from "../features/Product-list/productDetailSlice";
 import { useDispatch } from "react-redux";
+import { addToCart } from "../features/Cart/cardSlice";
 
 function AddToButton({ redirect = "/cart", ...props }) {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const handleClick = () => {
-    // dispatch(addToProductDetails(props));
+    dispatch(addToCart(props));
     navigate(redirect);
   };
   return (

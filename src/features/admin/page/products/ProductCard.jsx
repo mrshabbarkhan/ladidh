@@ -19,15 +19,15 @@ function ProductCard({ info }) {
   }
 
   return (
-    <section className="max-w-[16rem] min-w-[16rem] mb-3 text-wrap rounded-xl p-4 pb-2 bg-white shadow-lg">
+    <section className="flex flex-col justify-between max-w-[16rem] min-w-[16rem] mb-3 text-wrap rounded-xl p-4 pb-2 bg-white shadow-lg">
       <img
         src={img}
         alt={img}
-        className="object-cover object-center w-full h-40 rounded-t-xl"
+        className="object-cover object-center w-40 h-40 m-auto rounded-t-xl"
       />
-      <div className="px-2 mt-1">
+      <div className="px-2 mt-1  bottom-0">
         <p className="text-xs font-medium text-primary-dark">{pack}</p>
-        <h1 className="mt-2 text-md text-gray-800 leading-6 font-medium">
+        <h1 className=" text-md text-gray-800 leading-6 font-medium">
           {title}
         </h1>
         {discount && (

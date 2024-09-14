@@ -55,7 +55,6 @@ export default function AddProductPopup() {
     data.append("description", formData.description);
 
     dispatch(addNewProduct(data));
-    console.log(data)
     togglePopup();
     if (isSuccess) {
       dispatch(allProducts());
@@ -151,21 +150,20 @@ export default function AddProductPopup() {
                 </div>
 
                 {/* Coupon Code Field (Conditional) */}
-                {/* {formData.discount > 0 && ( */}
-                <div className="mb-4">
-                  <label className="block text-gray-600 text-sm mb-1">
-                    Coupon Code
-                  </label>
-                  <input
-                    id="code"
-                    value={formData.code}
-                    onChange={handleChange}
-                    type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
-                    required
-                  />
-                </div>
-                {/* )} */}
+                {formData.discount > 0 && (
+                  <div className="mb-4">
+                    <label className="block text-gray-600 text-sm mb-1">
+                      Coupon Code
+                    </label>
+                    <input
+                      id="code"
+                      value={formData.code}
+                      onChange={handleChange}
+                      type="text"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    />
+                  </div>
+                )}
 
                 {/* Price */}
                 <div className="mb-4">
@@ -210,7 +208,12 @@ export default function AddProductPopup() {
                   >
                     {categories?.map((category) => (
                       <>
-                        <option key={categories._id} value={`${category.cat_id}`}>{category.name}</option>
+                        <option
+                          key={categories._id}
+                          value={`${category.cat_id}`}
+                        >
+                          {category.name}
+                        </option>
                       </>
                     ))}
                   </select>

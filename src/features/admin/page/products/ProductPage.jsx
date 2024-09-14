@@ -10,7 +10,9 @@ import Loader from "../../../../components/Loader";
 function ProductPage() {
   const dispatch = useDispatch();
 
-  const { products, isLoading } = useSelector((state) => state.adminDashboard);
+  const { products, isLoading, refetchFlag } = useSelector(
+    (state) => state.adminDashboard
+  );
 
   const debouncedTerm = useSelector((state) => state.search.debouncedTerm);
 
@@ -23,8 +25,13 @@ function ProductPage() {
     dispatch(fetchAllCategory())
   }, []);
 
+  useEffect(() => {
+    if (refetchFlag) {
+      dispatch(allProducts())
+    }
+  },[refetchFlag])
 
-  if (isLoading) {
+  if (isLoading || refetchFlag) {
     return <Loader />;
   }
 
@@ -34,12 +41,12 @@ function ProductPage() {
         <h1 className="font-bold text-2xl text-center tracking-wide absolute top-5 sm:relative sm:top-0">
           Products
         </h1>
-        <div className="mt-10 sm:mt-0 flex w-fit items-center gap-3 absolute right-5 sm:right-14 top-6">
+        <div className="mt-10 px-5 sm:mt-0 flex w-full sm:w-fit items-center gap-3 absolute right-2 sm:right-14 top-6 ">
           <SearchBar placeholder={"search by products..."} />
           <AddProductPopup />
         </div>
       </div>
-      <div className="flex justify-center sm:justify-start gap-5 flex-wrap">
+      <div className="flex justify-center sm:justify-start gap-5 flex-wrap mt-10">
         {filteredProducts?.length ? (
           filteredProducts.map((dts, index) => {
             return <ProductCard key={index} info={dts} />;

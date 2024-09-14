@@ -7,7 +7,7 @@ function TrendProducts() {
     return (
         <section className="mb-12">
             <h1 className="text-lg font-medium mb-3 mt-2">Product on Trend</h1>
-            <div className="flex gap-5 overflow-x-auto w-full ">
+            <div className="flex gap-5 flex-wrap justify-between w-full ">
                 {products?.map((dts,index) => {
                     return <Card
                         key={index}
