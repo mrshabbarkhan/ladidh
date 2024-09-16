@@ -11,14 +11,15 @@ function ProductDetails() {
 
   const { product } = useSelector((state) => state.productDetails);
   const { cartItems } = useSelector((state) => state.cart);
-
-  const matchProductWithCart = cartItems?.find(item=>item.id === product.id)
-  console.log(matchProductWithCart)
-
+  // const matchProductWithCart = cartItems?.find(item=>item.id === product.id)
   const { tittle, price, oldPrice, img } = product;
 
   function handleCart() {
-    dispatch(addToCart(product))
+    const formData = {
+      productId : product.id,
+      quantity : tempQty,
+    }
+    dispatch(addToCart(formData))
   }
 
   return (
