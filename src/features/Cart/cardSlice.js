@@ -85,7 +85,8 @@ export const addToCart = createAsyncThunk(
     try {
       return await cartServices.addProductToCart(formData, options);
     } catch (error) {
-      console.log("errror", error);
+      console.log("Error adding item to cart :", error);
+      throw error; 
     }
   }
 );
@@ -95,6 +96,7 @@ export const removeCart = createAsyncThunk(
   async (formData, thunkAPI) => {
     const { userAuth } = thunkAPI.getState();
     const token = userAuth.user.token;
+    console.log(token)
 
     const options = {
       headers: {

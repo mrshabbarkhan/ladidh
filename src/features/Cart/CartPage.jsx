@@ -29,7 +29,7 @@ function CartPage() {
             img={dts.product.img}
             tittle={dts.product.tittle}
             price={dts.product.price}
-            id = {dts._id}
+            id = {dts.product._id}
             // oldPrice={dts.oldPrice}
           />
         ))}
@@ -48,8 +48,8 @@ function CartPage() {
         <div className="flex justify-between border-t mt-2">
           <h1 className="font-semibold text-lg">Total</h1>
           <h1 className="font-semibold text-lg">
-            &#x20B9;
-            {cartItems?.reduce((a, p) => a + p.product.price * totalQty, 0)}
+            &#x20B9;......
+            {/* {cartItems?.reduce((a, p) => a + p.product.price * totalQty, 0)} */}
           </h1>
         </div>
       </div>

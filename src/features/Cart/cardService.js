@@ -14,11 +14,15 @@ const allCartItmes = async (options) => {
 };
 
 const removeFromCart = async (formData, options) => {
-  console.log("from service", formData, options)
-  const res = await axios.delete(base_url + "/remove", formData, options).then(allCartItmes());
-  console.log(res.data)
-  return res.data
-}
+  console.log("from service", formData, options);
+
+  const res = await axios.delete(base_url + "/remove", {
+    ...options,
+    data: { productId: formData }, // Pass the formData as data in the request body
+  });
+
+  return res.data;
+};
 
 const cartServices = {
   allCartItmes,

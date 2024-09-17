@@ -28,10 +28,8 @@ function CartList({
   };
 
   const handleDelete = async () => {
-    const formData = new FormData()
-    formData.append("productId",id)
     try {
-      await dispatch(removeCart(formData))
+      await dispatch(removeCart(id))
       
     } catch (error) {
       throw new Error("unable to delete", error)
