@@ -3,6 +3,7 @@ import axios from "axios";
 const base_url = "/api/user/cart";
 
 const addProductToCart = async (formData, options) => {
+  console.log(formData)
   const res = await axios.post(base_url, formData, options);
   return res.data;
 };

@@ -6,6 +6,8 @@ import { addToCart, fetchAllCart } from "../features/Cart/cardSlice";
 function AddToButton({ redirect = "/cart", ...props }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  console.log(props)
+
   const handleClick = async () => {
     const formData = {
       productId: props.id,
