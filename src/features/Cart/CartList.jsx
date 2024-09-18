@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { decTotalQty, fetchAllCart, incrTotalQty, removeCart } from "./cardSlice";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 function CartList({
   id,
@@ -15,6 +16,7 @@ function CartList({
 }) {
   const [tempQty, setTempQty] = useState(qty);
   const dispatch = useDispatch();
+  
 
   const handleIncrease = () => {
     setTempQty(tempQty + 1);
@@ -29,8 +31,14 @@ function CartList({
 
   const handleDelete = async () => {
     try {
-      await dispatch(removeCart(id))
-      
+      const myPromise = dispatch(removeCart(id)).then(()=>dispatch(fetchAllCart()))
+
+      await toast.promise(myPromise, {
+        loading: "Removing Item...",
+        success: "Cart remove Successfully",
+        error: "Something went wrong",
+      });
+
     } catch (error) {
       throw new Error("unable to delete", error)
     }

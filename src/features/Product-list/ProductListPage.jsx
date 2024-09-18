@@ -17,6 +17,7 @@ function ProductListPage() {
       {filterByCatId?.map((dtl, index) => (
         <FavoriteList
           key={index}
+          id={dtl._id}
           img={dtl.img}
           pack={dtl.pack}
           tittle={dtl.title}

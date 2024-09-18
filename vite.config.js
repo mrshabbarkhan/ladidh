@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:8014",
+        target: "https://ladhidhbackend.vercel.app",
         changeOrigin: "true",
         secure: false,
       },

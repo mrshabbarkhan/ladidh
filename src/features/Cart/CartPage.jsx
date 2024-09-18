@@ -2,22 +2,27 @@ import { useDispatch, useSelector } from "react-redux";
 import CartList from "./CartList";
 import { useEffect } from "react";
 import { fetchAllCart } from "./cardSlice";
+import Loader from "../../components/Loader";
 
 function CartPage() {
   const dispatch = useDispatch();
-  const { cartItems, totalQty } = useSelector((state) => state.cart);
-  
+  const { cartItems, totalQty, isLoading } = useSelector((state) => state.cart);
+
   useEffect(() => {
     async function fetchCarts(params) {
       try {
         await dispatch(fetchAllCart());
       } catch (error) {
-        console.log(error)
-        throw new Error("Unable to get Carts Data")
+        console.log(error);
+        throw new Error("Unable to get Carts Data");
       }
     }
-    fetchCarts()
+    fetchCarts();
   }, []);
+
+  if (isLoading) {
+    return <Loader className={"h-80"} />;
+  }
 
   return (
     <>
@@ -29,7 +34,7 @@ function CartPage() {
             img={dts.product.img}
             tittle={dts.product.tittle}
             price={dts.product.price}
-            id = {dts.product._id}
+            id={dts.product._id}
             // oldPrice={dts.oldPrice}
           />
         ))}

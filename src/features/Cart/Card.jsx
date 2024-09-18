@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import AddToButton from "../../components/AddToButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToProductDetails } from "../Product-list/productDetailSlice";
 
 function Card(props) {
@@ -15,7 +15,7 @@ function Card(props) {
     <section className=" max-w-[16rem] min-w-[16rem] mb-3 text-wrap rounded-xl p-4 pb-2 bg-white shadow-lg">
       <img
         src={img}
-        alt={img}
+        alt={tittle}
         className="object-cover object-center m-auto w-40 h-40 rounded-t-xl"
         onClick={handleClick}
       />

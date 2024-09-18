@@ -1,14 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import cartServices from "./cardService";
 import qs from "qs";
+import toast from "react-hot-toast";
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
     cartItems: [],
     increaseQty: 1,
-    decreaseQty : 1,
-    totalQty : 1,
+    decreaseQty: 1,
+    totalQty: 1,
     totalPrice: null,
     isLoading: false,
     isSuccuss: false,
@@ -16,11 +17,11 @@ const cartSlice = createSlice({
   },
   reducers: {
     incrTotalQty(state, action) {
-      state.totalQty = state.totalQty += 1
+      state.totalQty = state.totalQty += 1;
     },
     decTotalQty(state, action) {
-      state.totalQty = state.totalQty -= 1
-    }
+      state.totalQty = state.totalQty -= 1;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -33,23 +34,22 @@ const cartSlice = createSlice({
         state.isLoading = false;
         state.isSuccuss = true;
         state.isError = false;
-        state.cartItems = action.payload
-        state.totalQty = state.cartItems.reduce((a,p)=>a+p.quantity,0)
-        
+        state.cartItems = action.payload;
+        state.totalQty = state.cartItems.reduce((a, p) => a + p.quantity, 0);
       })
       .addCase(fetchAllCart.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccuss = false;
         state.isError = true;
+        toast.error("Something went wrong");
       });
   },
 });
 
-
 export const fetchAllCart = createAsyncThunk(
   "GET/CART",
   async (_, thunkAPI) => {
-    const { userAuth } = thunkAPI.getState(); 
+    const { userAuth } = thunkAPI.getState();
     const token = userAuth.user.token;
 
     const options = {
@@ -60,14 +60,13 @@ export const fetchAllCart = createAsyncThunk(
     };
 
     try {
-      return await cartServices.allCartItmes(options); 
+      return await cartServices.allCartItmes(options);
     } catch (error) {
       console.log("Error fetching cart items:", error);
-      throw error; 
+      throw error;
     }
   }
 );
-
 
 export const addToCart = createAsyncThunk(
   "FETCH/CART",
@@ -86,7 +85,7 @@ export const addToCart = createAsyncThunk(
       return await cartServices.addProductToCart(formData, options);
     } catch (error) {
       console.log("Error adding item to cart :", error);
-      throw error; 
+      throw error;
     }
   }
 );
@@ -96,7 +95,6 @@ export const removeCart = createAsyncThunk(
   async (formData, thunkAPI) => {
     const { userAuth } = thunkAPI.getState();
     const token = userAuth.user.token;
-    console.log(token)
 
     const options = {
       headers: {
@@ -106,7 +104,7 @@ export const removeCart = createAsyncThunk(
     };
 
     try {
-      return await cartServices.removeFromCart(formData, options);
+      await cartServices.removeFromCart(formData, options);
     } catch (error) {
       console.log("Error remove cart items:", error);
       throw error;
@@ -114,5 +112,5 @@ export const removeCart = createAsyncThunk(
   }
 );
 
-export const { incrTotalQty , decTotalQty } = cartSlice.actions;
+export const { incrTotalQty, decTotalQty } = cartSlice.actions;
 export default cartSlice.reducer;
