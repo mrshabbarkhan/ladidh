@@ -21,6 +21,7 @@ const BannerPage = lazy(() =>
 import ProtectedRoute from "./features/admin/components/ProtectedRoute";
 import Loader from "./components/Loader";
 import { Toaster } from "react-hot-toast";
+import AuthButton from "./features/auth/AuthButton";
 
 const HomePage = lazy(() => import("./features/Home/HomePage"));
 const CategoryPage = lazy(() => import("./features/Category/CategoryPage"));

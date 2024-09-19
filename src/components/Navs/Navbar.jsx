@@ -25,9 +25,9 @@ function Navbar() {
                 <h1 className="font-bold text-lg">Ladhidh</h1>
                 <Location />
               </span>
-              <div className="flex items-center gap-10">
+              <div className="flex items-center gap-4">
                 {user ? null : <AuthButton />}
-                <div className="border p-1 rounded-lg">
+                <div className="border-2 p-0.5 rounded-lg">
                   <MenuSvg Component={SideBar} />
                 </div>
               </div>

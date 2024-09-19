@@ -41,7 +41,6 @@ const cartSlice = createSlice({
         state.isLoading = false;
         state.isSuccuss = false;
         state.isError = true;
-        toast.error("Something went wrong");
       });
   },
 });

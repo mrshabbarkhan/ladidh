@@ -2,8 +2,9 @@ import { useState } from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
-function AuthButton() {
-  const [showForm, setShowForm] = useState(false);
+function AuthButton( show ) {
+  console.log(show)
+  const [showForm, setShowForm] = useState(show);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const handleClick = (e) => {
     if (e.target.className.includes("overley")) {
@@ -14,10 +15,10 @@ function AuthButton() {
     <>
       <span
         onClick={() => setShowForm(!showForm)}
-        className="flex items-center gap-2 text-xl"
+        className="flex items-center gap-2 text-xl border-2 h-9 w-9 rounded-full"
       >
-        <i className="fa-solid fa-user "></i>
-        <h1>Login</h1>
+        <i className="fa-solid fa-user m-auto"></i>
+        {/* <h1>Login</h1> */}
       </span>
       {showForm && (
         <div

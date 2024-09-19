@@ -7,25 +7,29 @@ import OfferForYou from "./OfferForYou";
 import SaleForYou from "./SaleForYou";
 import TrendProducts from "./TrendProducts";
 import { useDispatch, useSelector } from "react-redux";
-import { allProducts, fetchAllCategory, fetchBanners } from "../redux/adminAuth/adminActionSlice";
+import {
+  allProducts,
+  fetchAllCategory,
+  fetchBanners,
+} from "../redux/adminAuth/adminActionSlice";
 
 function HomePage() {
   const navigateCategories = "/category";
   const { categories } = useSelector((state) => state.adminDashboard);
 
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(allProducts())
-    dispatch(fetchBanners())
-    dispatch(fetchAllCategory())
-  }, [])
-
+  const dispatch = useDispatch();
   
+  useEffect(() => {
+    dispatch(allProducts());
+    dispatch(fetchBanners());
+    dispatch(fetchAllCategory());
+  }, []);
+
   return (
     <>
       <div className="pt-16 relative overflow-hidden">
         <Category heading={"Categories"} btn={"view all"}>
-          {categories?.slice(0,6).map((dts) => (
+          {categories?.slice(0, 6).map((dts) => (
             <Categories
               key={dts._id}
               img={dts.img}
