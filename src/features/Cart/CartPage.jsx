@@ -70,7 +70,7 @@ function CartPage() {
               pack={dts.product.pack}
               onQtyChange={handleQtyChange} // Pass the handler
             />
-          ))}
+          )).reverse()}
 
         <div className="p-3 rounded-lg border-2 border-dashed border-primary">
           <h1 className="font-semibold text-lg">Bill Details</h1>
