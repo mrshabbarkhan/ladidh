@@ -67,7 +67,7 @@ function Location() {
           className="absolute h-screen top-0 left-0  z-30 w-full flex pt-24 px-2 md:px-24 lg:px-48 justify-center overley bg-black/30 "
         >
           <div className=" w-full overley">
-            <span className="flex bg-white p-1 items-center  pl-2 rounded-t-lg gap-2 -translate-y-1.5 text-black shadow-xl">
+            <span className="flex bg-white p-1 items-center  pl-2 rounded-t-lg gap-2 -translate-y-1.5 text-black">
               <SearchSvg />
               <input
                 className="  w-full outline-none border-none focus:ring-0"
@@ -77,7 +77,7 @@ function Location() {
               />
             </span>
             {searchData && (
-              <ul className=" z-20 rounded-b-md px-2 py-1 bg-white text-black">
+              <ul className="-translate-y-2 z-20 rounded-b-md px-2 py-1 bg-white text-black">
                 {searchData?.map((data, index) => (
                   <li
                     onClick={() => handleLiClick(data.display_name)}

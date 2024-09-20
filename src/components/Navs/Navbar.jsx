@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import patternImage from "../../assets/images/pattern1.png";
 import Map from "../../assets/ui/Map";
 import MenuSvg from "../../assets/ui/MenuSvg";
-import SearchSvg from "../../assets/ui/SearchSvg";
 import AuthButton from "../../features/auth/AuthButton";
 import SideBar from "./SideBar";
 import Location from "../Location";
 import { useSelector } from "react-redux";
+import SearchProduct from "../SearchProduct";
 
 function Navbar() {
   const { user } = useSelector((state) => state.userAuth);
@@ -34,16 +34,7 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <div className="text-center absolute bottom-0 m-auto w-full translate-y-1/2 px-2 md:px-24 lg:px-48  ">
-          <div className="border-2 pl-2 w-full rounded-xl flex items-center bg-white focus-within:border-primary-light overflow-hidden">
-            <SearchSvg />
-            <input
-              type="text"
-              className=" focus:outline-none focus:ring-0 focus:border-transparent w-full ml-2 outline-none border-none"
-              placeholder="Type product name to search"
-            ></input>
-          </div>
-        </div>
+       <SearchProduct/>
       </header>
     </section>
   );

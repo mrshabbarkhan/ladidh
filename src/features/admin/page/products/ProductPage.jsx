@@ -32,7 +32,7 @@ function ProductPage() {
   },[refetchFlag])
 
   if (isLoading || refetchFlag) {
-    return <Loader />;
+    return <Loader className={"h-full"} />;
   }
 
   return (

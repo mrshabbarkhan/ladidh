@@ -12,13 +12,12 @@ function ProductDetails() {
   const navigate = useNavigate();
 
   const { product } = useSelector((state) => state.productDetails);
-  const { cartItems } = useSelector((state) => state.cart);
-  // const matchProductWithCart = cartItems?.find(item=>item.id === product.id)
+ 
   const { tittle, price, oldPrice, img } = product;
 
   async function handleCart() {
     const formData = {
-      productId: product.id,
+      productId: product.id || product._id,
       quantity: tempQty,
     };
 
@@ -39,14 +38,14 @@ function ProductDetails() {
 
   return (
     <>
-      <div className=" absolute top-0 left-0 right-0 object-cover ">
+      <div className=" absolute top-0 left-0 right-0 object-cover pt-12">
         <img className="w-auto mx-auto h-[50vh]  opacity-85 " src={img} alt="" />
         <section className="bg-white h-52 pt-2 px-2 md:px-24 lg:px-48 reletive top-0 overflow-hidden pb-80 md:pb-56">
-          <h1 className="font-semibold text-xl">{tittle}</h1>
-          <p className="my-2 text-sm">
+          <h1 className="font-semibold text-xl">{product.tittle|| product.title}</h1>
+          {/* <p className="my-2 text-sm">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
+          </p> */}
           <div className="flex items-center gap-3 font-semibold">
             <span className="flex items-center gap-1">
               <StarSvg /> 4.6

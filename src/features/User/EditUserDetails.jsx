@@ -1,10 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 function EditUserDetails({ user, seterFn }) {
-  const [error, setError] = useState("")
+  const {pathname} = useLocation()
+  const isInPaymentPage = pathname == "/payment"
+  
   const [formData, setFormData] = useState({
-    firstName: user.firstName || "",
+    firstName: user.name || "",
     lastName: user.lastName || "",
     email: user.email || "",
     number: user.number || "",
@@ -21,35 +24,33 @@ function EditUserDetails({ user, seterFn }) {
     });
   };
 
- const handleSubmit = async (e) => {
-   e.preventDefault();
-   console.log(user, formData.oldPassword)
-   if (user.password !== formData.oldPassword) {
-     return setError("Old password not matched")
-   } else {
-     console.log("Form data submitted: ", formData);
-   }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
- };
-
+    console.log("Form data submitted: ", formData);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="">
-        <div className="pb-5">
+        {isInPaymentPage || <div className="pb-5">
           <p className="mt-1 text-center font-semibold text-sm leading-6 text-gray-600">
             This information will be displayed publicly so be careful what you
             share.
           </p>
-        </div>
+        </div>}
 
         <div className="border-b border-gray-900/10 pb-12">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">
-            Personal Information
-          </h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            Use a permanent address where you can receive mail.
-          </p>
+          {isInPaymentPage || (
+            <>
+              <h2 className="text-base font-semibold leading-7 text-gray-900">
+                Personal Information
+              </h2>
+              <p className="mt-1 text-sm leading-6 text-gray-600">
+                Use a permanent address where you can receive mail.
+              </p>
+            </>
+          )}
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
@@ -114,48 +115,6 @@ function EditUserDetails({ user, seterFn }) {
 
             <div className="sm:col-span-4">
               <label
-                htmlFor="oldPassword"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Old password
-              </label>
-              <div className="mt-2">
-                <input
-                  id="oldPassword"
-                  name="oldPassword"
-                  type="text"
-                  value={formData.oldpassword}
-                  onChange={handleChange}
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            {error && <span className="text-red-400 text-sm">{error}</span>}
-            </div>
-
-
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="Password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                New password
-              </label>
-              <div className="mt-2">
-                <input
-                  id="Password"
-                  name="password"
-                  type="text"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-4">
-              <label
                 htmlFor="number"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
@@ -195,7 +154,7 @@ function EditUserDetails({ user, seterFn }) {
               </div>
             </div>
 
-            {/* <div className="sm:col-span-2 sm:col-start-1">
+            <div className="sm:col-span-2 sm:col-start-1">
               <label
                 htmlFor="city"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -213,9 +172,9 @@ function EditUserDetails({ user, seterFn }) {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-            </div> */}
+            </div>
 
-            {/* <div className="sm:col-span-2">
+            <div className="sm:col-span-2">
               <label
                 htmlFor="region"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -233,9 +192,9 @@ function EditUserDetails({ user, seterFn }) {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-            </div> */}
+            </div>
 
-            {/* <div className="sm:col-span-2">
+            <div className="sm:col-span-2">
               <label
                 htmlFor="postalCode"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -253,7 +212,7 @@ function EditUserDetails({ user, seterFn }) {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

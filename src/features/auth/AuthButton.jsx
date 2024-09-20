@@ -1,14 +1,19 @@
 import { useState } from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import { useLocation } from "react-router-dom";
+import BackButton from "../../components/BackButton";
 
-function AuthButton( show ) {
-  console.log(show)
-  const [showForm, setShowForm] = useState(show);
+function AuthButton({ onClickOverlyHide = false }) {
+  const [showForm, setShowForm] = useState(true);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const location = useLocation()
+  const isInCart = location.pathname == "/cart"
   const handleClick = (e) => {
-    if (e.target.className.includes("overley")) {
-      setShowForm(false);
+    if (!onClickOverlyHide) {
+      if (e.target.className.includes("overley")) {
+        setShowForm(false);
+      }
     }
   };
   return (
@@ -26,12 +31,17 @@ function AuthButton( show ) {
           className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50 overley"
         >
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-8 relative">
-            <div
+            {!onClickOverlyHide && <div
               onClick={() => setShowForm(!showForm)}
-              className="text-black absolute right-10 top-5"
+              className="text-black absolute right-10 top-7 "
             >
-              <i class="fa-regular fa-circle-xmark"></i>
-            </div>
+              <i class="fa-regular fa-circle-xmark text-lg"></i>
+            </div>}
+            {isInCart && (
+              <div className=" left-10 top-5">
+                <BackButton>Back</BackButton>
+              </div>
+            )}
             {showRegisterForm ? (
               <RegisterForm setRegister={setShowRegisterForm} />
             ) : (

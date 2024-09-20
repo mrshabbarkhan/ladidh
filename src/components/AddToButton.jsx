@@ -24,7 +24,7 @@ const handleClick = async () => {
     navigate(redirect);
   } catch (error) {
     console.error(error);
-  }
+  } 
 };
 
   return (

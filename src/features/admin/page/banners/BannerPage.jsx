@@ -33,7 +33,7 @@ function BannerPage() {
 
 
   if (isLoading) {
-    return <Loader/>
+    return <Loader className={"h-full"}/>
   }
 
   if (refetchFlag) {

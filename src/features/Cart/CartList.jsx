@@ -1,88 +1,83 @@
 import { useState } from "react";
-import { decTotalQty, fetchAllCart, incrTotalQty, removeCart } from "./cardSlice";
+import {
+  decTotalQty,
+  incrTotalQty,
+  removeCart,
+  fetchAllCart,
+} from "./cardSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 
-function CartList({
-  id,
-  img,
-  pack = 1,
-  qty = 1,
-  tittle,
-  discount,
-  code,
-  price,
-  oldPrice,
-}) {
+function CartList({ id, img, qty = 1, title, price, pack, onQtyChange }) {
   const [tempQty, setTempQty] = useState(qty);
   const dispatch = useDispatch();
-  
 
   const handleIncrease = () => {
-    setTempQty(tempQty + 1);
+    const newQty = tempQty + 1;
+    setTempQty(newQty);
     dispatch(incrTotalQty());
+    onQtyChange(id, newQty); // Notify CartPage of the updated quantity
   };
 
   const handleDecrease = () => {
-    setTempQty(tempQty > 1 ? tempQty - 1 : tempQty);
-    if (tempQty < 1) return;
-    dispatch(decTotalQty());
+    if (tempQty > 1) {
+      const newQty = tempQty - 1;
+      setTempQty(newQty);
+      dispatch(decTotalQty());
+      onQtyChange(id, newQty); // Notify CartPage of the updated quantity
+    }
   };
 
   const handleDelete = async () => {
     try {
-      const myPromise = dispatch(removeCart(id)).then(()=>dispatch(fetchAllCart()))
+      const myPromise = dispatch(removeCart(id)).then(() =>
+        dispatch(fetchAllCart())
+      );
 
       await toast.promise(myPromise, {
         loading: "Removing Item...",
-        success: "Cart remove Successfully",
+        success: "Cart removed Successfully",
         error: "Something went wrong",
       });
 
     } catch (error) {
-      throw new Error("unable to delete", error)
+      throw new Error("Unable to delete", error);
     }
-    dispatch(fetchAllCart())
-  }
+  };
 
   return (
     <div className="mb-5 Favorites_List drop-shadow-lg flex p-2 rounded-lg">
       <div className="grow flex flex-col justify-between">
         <div>
           <h1 className="mt-2 text-md text-gray-800 leading-6 font-medium">
-            {tittle}
+            {title}
           </h1>
-          {discount && (
-            <p className="text-xs mt-2 text-orange-500">
-              FLAT {discount} off Code: {code}
-            </p>
-          )}
           <div className="flex items-center gap-2">
             <h1 className="text-xl text-primary-dark font-semibold">
               &#x20B9; {price}
             </h1>
-            <span className="line-through text-gray-500 font-medium">
-              {oldPrice}
-            </span>
           </div>
-          <p className="text-xs font-medium text-primary-dark">{pack} pack</p>
+          <p className="text-xs font-medium text-primary-dark">{pack}</p>
         </div>
-        <div onClick={handleDelete} className="border shadow w-fit py-1 px-2 rounded-lg hover:text-white hover:bg-primary-dark transition-all cursor-pointer">
+        <div
+          onClick={handleDelete}
+          className="border shadow w-fit py-1 px-2 rounded-lg hover:text-white hover:bg-primary-dark transition-all cursor-pointer"
+        >
           <i className="fa fa-trash-alt text-xl"></i>
         </div>
       </div>
       <div className="flex flex-col gap-2">
-        <img className="w-24 rounded-lg object-cover" src={img} alt="" />
+        <img className="w-24 rounded-lg object-cover" src={img} alt={title} />
         <div className="flex justify-between">
           <button
-            onClick={() => handleIncrease()}
+            onClick={handleIncrease}
             className="border border-primary-dark px-2 rounded-lg hover:text-white hover:bg-primary-dark transition font-semibold"
           >
             +
           </button>
           <h1 className="font-semibold">{tempQty}</h1>
           <button
-            onClick={() => handleDecrease()}
+            onClick={handleDecrease}
             className="border border-primary-dark px-2 rounded-lg hover:text-white hover:bg-primary-dark transition font-semibold"
           >
             -

@@ -18,6 +18,7 @@ function FavoritesPage() {
       {favoriteProducts.map((dtl, index) => (
         <FavoriteList
           key={index}
+          id={dtl.id}
           img={dtl.img}
           pack={dtl.pack}
           tittle={dtl.tittle}

@@ -255,12 +255,13 @@ export const allProducts = createAsyncThunk(
 
 export const addNewProduct = createAsyncThunk(
   "POST/PRODUCTS",
-  async (formData,thunkAPI) => {
+  async (formData, thunkAPI) => {
+    console.log(formData)
     try {
       return await adminServices.addProducts(formData);
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.error)
+      // toast.error(error.response.data.error)
       return thunkAPI.rejectWithValue("Something went wrong")
     }
   }

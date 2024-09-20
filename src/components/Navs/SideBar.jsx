@@ -11,12 +11,11 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../features/redux/userAuth/authSlice";
 
-
 function SideBar({ on, setOn }) {
   const [toggle, setToggle] = useState(false);
   const { user } = useSelector((state) => state.userAuth);
-  
-  const dispatch = useDispatch()
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -31,15 +30,19 @@ function SideBar({ on, setOn }) {
         onClick={() => setOn(!on)}
       >
         <Link to={"/profile"}>
-        <div className="author-box flex items-center bg-primary p-5 ">
-          <div className="dz-media border-2 border-white w-10 h-10 overflow-hidden object-cover object-center rounded-md mr-3">
-            <img src={UserImage} alt="" />
+          <div className="author-box flex items-center bg-primary p-5 ">
+            <div className="dz-media border-2 border-white w-10 h-10 overflow-hidden object-cover object-center rounded-md mr-3">
+              <img src={UserImage} alt="" />
+            </div>
+            <div className="dz-info ">
+              <h5 className="name text-white mb-0 font-bold">
+                {user ? user.name : "Logged in"}
+              </h5>
+              <div className="text-white text-sm text-balance w-40 line-clamp-1">
+                {user ? user.email : "No email found"}
+              </div>
+            </div>
           </div>
-          <div className="dz-info ">
-            <h5 className="name text-white mb-0 font-bold">{user ? user.name : "User Not Logged in"}</h5>
-            <div className="text-white text-sm text-balance w-40 line-clamp-1">{user ? user.email : "No email found"}</div>
-          </div>
-        </div>
         </Link>
 
         <ul className=" p-4 mb-7">
@@ -60,15 +63,6 @@ function SideBar({ on, setOn }) {
           </li>
 
           <li>
-            <a className="nav-link flex items-center text-black py-2">
-              <span className="dz-icon mr-2">
-                <ComponentsSvg />
-              </span>
-              <span>Components</span>
-            </a>
-          </li>
-
-          <li>
             <Link
               to={"/profile"}
               className="nav-link flex items-center text-black py-2"
@@ -80,16 +74,28 @@ function SideBar({ on, setOn }) {
             </Link>
           </li>
 
-          <li>
-            <a className="nav-link flex items-center text-black py-2 relative">
+          <li className="pl-1">
+            <Link
+              to={"/cart"}
+              className="nav-link flex items-center text-black py-2"
+            >
               <span className="dz-icon mr-2">
-                <ChatSvg />
+                <i className="fa-solid fa-bag-shopping mr-1 text-gray-200"></i>
               </span>
-              <span>Chat</span>
-              <span className="badge bg-info text-white absolute top-0 right-0 text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                5
+              <span>Cart</span>
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              to={"/category"}
+              className="nav-link flex items-center text-black py-2"
+            >
+              <span className="dz-icon mr-2">
+                <ComponentsSvg />
               </span>
-            </a>
+              <span>Cetegory</span>
+            </Link>
           </li>
 
           {user?.isAdmin && (
@@ -110,7 +116,7 @@ function SideBar({ on, setOn }) {
           )}
 
           {user && (
-            <li>
+            <li className="absolute bottom-5">
               <a
                 className="nav-link flex items-center text-black py-2"
                 onClick={() => dispatch(logOut())}
@@ -123,7 +129,7 @@ function SideBar({ on, setOn }) {
             </li>
           )}
 
-          <li className="nav-label uppercase text-sm font-semibold text-black border-t border-[var(--border-color)] pt-5 mt-5">
+          {/* <li className="nav-label uppercase text-sm font-semibold text-black border-t border-[var(--border-color)] pt-5 mt-5">
             Settings
           </li>
 
@@ -139,9 +145,9 @@ function SideBar({ on, setOn }) {
               </span>
               <span>Color Theme</span>
             </a>
-          </li>
+          </li> */}
 
-          <li className="mode flex items-center justify-between py-2">
+          {/* <li className="mode flex items-center justify-between py-2">
             <div className="flex items-center">
               <span className="dz-icon mr-2">
                 <DarkSvg />
@@ -166,14 +172,14 @@ function SideBar({ on, setOn }) {
                 ></span>
               </label>
             </div>
-          </li>
+          </li> */}
         </ul>
-        <div className="sidebar-bottom mt-auto p-5">
+        {/* <div className="sidebar-bottom mt-auto p-5">
           <h6 className="name mb-2 text-black">
             W3Meat - Meat Shop Mobile App
           </h6>
           <span className="ver-info text-sm text-black">App Version 1.0</span>
-        </div>
+        </div> */}
       </div>
     </>
   );

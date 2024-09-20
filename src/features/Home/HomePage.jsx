@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import NavigationBar from "../../components/Navs/NavigationBar";
-// import { Categories_Items } from "../../utils/utils";
 import Categories from "../Category/Categories";
 import Category from "../Category/Category";
 import OfferForYou from "./OfferForYou";

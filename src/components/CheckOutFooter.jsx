@@ -1,6 +1,13 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function CheckOutFooter() {
+  const { cartItems, isLoading } = useSelector((state) => state.cart);
+
+  if (!cartItems.length) {
+    return null
+  }
+
   return (
     <Link to={"/payment"}>
     <div className="flex bg-primary items-center justify-between px-4 py-2 text-white my-2 mx-2 rounded-lg">

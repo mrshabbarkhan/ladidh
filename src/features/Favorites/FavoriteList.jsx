@@ -1,6 +1,7 @@
 import AddToButton from "../../components/AddToButton";
 
 function FavoriteList(props) {
+  console.log(props)
   const { img, pack, tittle, discount, code, price, oldPrice } = props
   return (
     <div className="mb-5 Favorites_List drop-shadow-lg flex p-2 rounded-lg">
