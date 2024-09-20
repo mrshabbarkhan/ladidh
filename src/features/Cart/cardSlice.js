@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import cartServices from "./cardService";
-import qs from "qs";
-import toast from "react-hot-toast";
 
 const cartSlice = createSlice({
   name: "cart",
