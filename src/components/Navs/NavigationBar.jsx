@@ -9,7 +9,7 @@ function NavigationBar() {
 
   return (
     <section className="w-full fixed bottom-0 left-0 md:px-24 lg:px-48 overflow-hidden text-xs sm:text-sm bg-white">
-      {isOnCart ? <CheckOutFooter/> : <NavAllItems/>}
+      {isOnCart || <NavAllItems/>}
     </section>
   );
 }
