@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
-function EditUserDetails({ user, seterFn }) {
+function EditUserDetails({ user, onSubmit }) {
   const {pathname} = useLocation()
   const isInPaymentPage = pathname == "/payment"
   
@@ -26,8 +26,8 @@ function EditUserDetails({ user, seterFn }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("Form data submitted: ", formData);
+    // console.log("Form data submitted: ", formData);
+    onSubmit(formData)
   };
 
   return (
@@ -219,7 +219,7 @@ function EditUserDetails({ user, seterFn }) {
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <button
-          onClick={() => seterFn(false)}
+          onClick={() => {}}
           type="button"
           className="text-sm font-semibold leading-6 text-gray-900"
         >

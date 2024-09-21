@@ -27,9 +27,9 @@ function Navbar() {
               </span>
               <div className="flex items-center gap-4">
                 {user ? null : <AuthButton />}
-                <div className="border-2 p-0.5 rounded-lg">
+                {user && <div className="border-2 p-0.5 rounded-lg">
                   <MenuSvg Component={SideBar} />
-                </div>
+                </div>}
               </div>
             </div>
           </div>

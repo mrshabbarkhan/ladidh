@@ -45,6 +45,10 @@ function PaymentPage() {
     setSelectedAccordion(id); // Set the selected accordion by id
   };
 
+  const handleSubmit = (formData) => {
+    console.log(formData)
+  }
+
   return (
     <div>
       <h1 className="font-semibold text-lg">Select Payment Mode</h1>
@@ -58,6 +62,7 @@ function PaymentPage() {
             element={item.element}
             isSelected={selectedAccordion === item.id} // Check if this accordion is selected
             onSelect={() => handleSelectAccordion(item.id)} // Set as selected when clicked
+            handleSubmit={handleSubmit}
           />
         ))}
       </div>

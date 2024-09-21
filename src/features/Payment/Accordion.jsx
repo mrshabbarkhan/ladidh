@@ -1,11 +1,20 @@
 import React, { useRef } from "react";
 import EditUserDetails from "../User/EditUserDetails";
 import { useSelector } from "react-redux";
+import AddressLayout from "./AddressLayout";
 
-const Accordion = ({ title, content, icon, element, isSelected, onSelect }) => {
+const Accordion = ({
+  title,
+  content,
+  icon,
+  element,
+  isSelected,
+  onSelect,
+  handleSubmit,
+}) => {
   const contentRef = useRef(null);
-  const { user } = useSelector(state => state.userAuth)
-  
+  const { user } = useSelector((state) => state.userAuth);
+
   return (
     <div className="Favorites_List rounded-xl my-5 px-2 transition-all ">
       <div
@@ -33,7 +42,11 @@ const Accordion = ({ title, content, icon, element, isSelected, onSelect }) => {
         }}
       >
         <div className="pb-2 pl-5 text-sm text-gray-600">
-         {content ? <p>{content || element}</p> : <EditUserDetails user={user} seterFn={onSelect}/>}
+          {content ? (
+            <p>{content || element}</p>
+          ) : (
+              <AddressLayout/>
+          )}
         </div>
       </div>
     </div>
