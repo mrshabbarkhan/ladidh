@@ -8,6 +8,7 @@ import RegisterForm from "../auth/RegisterForm";
 import LoginForm from "../auth/LoginForm";
 import { useState } from "react";
 import EditUserDetails from "./EditUserDetails";
+import AuthButton from "../auth/AuthButton";
 
 function ProfilePage() {
   const { user } = useSelector((state) => state.userAuth);
@@ -34,18 +35,7 @@ function ProfilePage() {
           </section>
         </>
       ) : (
-        <div
-          // onClick={handleClick}
-          className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50 overley"
-        >
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-8 relative">
-            {showRegisterForm ? (
-              <RegisterForm setRegister={setShowRegisterForm} />
-            ) : (
-              <LoginForm setRegister={setShowRegisterForm} />
-            )}
-          </div>
-        </div>
+        <AuthButton onClickOverlyHide="true" />
       )}
     </div>
   );

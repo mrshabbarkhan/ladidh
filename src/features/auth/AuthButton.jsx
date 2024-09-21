@@ -9,6 +9,7 @@ function AuthButton({ onClickOverlyHide = false }) {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const location = useLocation()
   const isInCart = location.pathname == "/cart"
+  const isInProfile = location.pathname == "/profile"
   const handleClick = (e) => {
     if (!onClickOverlyHide) {
       if (e.target.className.includes("overley")) {
@@ -37,7 +38,7 @@ function AuthButton({ onClickOverlyHide = false }) {
             >
               <i class="fa-regular fa-circle-xmark text-lg"></i>
             </div>}
-            {isInCart && (
+            {(isInCart || isInProfile) && (
               <div className=" left-10 top-5">
                 <BackButton>Back</BackButton>
               </div>
